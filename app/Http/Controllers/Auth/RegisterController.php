@@ -38,6 +38,7 @@ class RegisterController extends Controller
             'email'     => $request->email,
             'join_date' => $todayDate,
             'role_name' => $request->role_name,
+            'created_by'=> '1',
             'password'  => Hash::make($request->password),
         ]);
         Toastr::success('Create new account successfully :)','Success');

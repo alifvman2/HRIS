@@ -7,21 +7,17 @@ use DB;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Models\Employee;
 use App\Models\User;
+use Auth;
+use Carbon\Carbon;
 use App\Models\module_permission;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Reader\Csv;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Reader\Xls;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
-    // all employee card view
-    public function cardAllEmployee(Request $request)
-    {
-        $users = DB::table('users')
-                    ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
-                    ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                    ->get(); 
-        $userList = DB::table('users')->get();
-        $permission_lists = DB::table('permission_lists')->get();
-        return view('form.allemployeecard',compact('users','userList','permission_lists'));
-    }
     // all employee list
     public function listAllEmployee()
     {
@@ -32,6 +28,17 @@ class EmployeeController extends Controller
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
         return view('form.employeelist',compact('users','userList','permission_lists'));
+    }
+    // all employee card view
+    public function cardAllEmployee(Request $request)
+    {
+        $users = DB::table('users')
+                    ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
+                    ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
+                    ->get(); 
+        $userList = DB::table('users')->get();
+        $permission_lists = DB::table('permission_lists')->get();
+        return view('form.allemployeecard',compact('users','userList','permission_lists'));
     }
 
     // save data employee
@@ -91,6 +98,146 @@ class EmployeeController extends Controller
             Toastr::error('Add new employee fail :)','Error');
             return redirect()->back();
         }
+    }
+    // import data employee
+    public function importRecord(Request $request)
+    {
+
+        $request->validate([
+            'file'      => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        DB::beginTransaction();
+        try{
+
+            $error = null;
+
+            $path           = $request->file('file');
+            $path_file      = $path->getClientOriginalExtension();
+
+            if ('xlsx'      == $path_file) {
+                $reader     = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            } else if ('xls'  == $path_file) {
+                $reader     = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+            } else {
+                $reader     = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            }
+
+            $spreadsheet    = $reader->load($_FILES['file']['tmp_name']);
+            $sheetData      = $spreadsheet->getActiveSheet()->toArray();
+
+            $count          = count($sheetData);
+            $tampung        = [];
+
+            foreach ($sheetData as $key => $value) {
+                if ($value[0]) {
+                    array_push($tampung, $value);
+                }
+            }
+            for ($i = 2; $i < count($tampung); $i++) {
+
+                $name = $tampung[$i][1];
+                $job_level = $tampung[$i][2];
+                $organization = $tampung[$i][3];
+                $join_date = date('Y-m-d' , strtotime($tampung[$i][4]));
+                $employee_type = $tampung[$i][5];
+                $email = $tampung[$i][6];
+                $phone = $tampung[$i][7];
+
+                $job_level = DB::table('job_level')
+                    ->select('id', 'code')
+                    ->where('name', $job_level)
+                    ->first();
+
+                $code = $job_level->code;
+                $job_level = $job_level->id;
+
+                $organization = DB::table('organization_structure')
+                    ->select('id')
+                    ->where('name', $organization)
+                    ->first();
+
+                $organization = $organization->id;
+
+                $employee_type = DB::table('employee_type')
+                    ->select('id')
+                    ->where('name', $employee_type)
+                    ->first();
+
+                $employee_type = $employee_type->id;
+
+                if (!$email) {
+                    $email = "default" . $name . "@gmail.com";
+                }
+
+                $check = \DB::table('users')
+                    ->where('email', $email)
+                    ->first();
+
+                if (!$check) {
+
+                    // if (strlen($password) >= 6) {
+
+                        $password = Hash::make($name);
+                        $insert = DB::table('users')
+                            ->insertGetId([
+                                'name'          => $name,
+                                'email'         => $email,
+                                'password'      => $password,
+                                'join_date'     => $join_date,
+                                'phone_number'  => $phone,
+                                'role_name'     => 'Employee',
+                                'avatar'        => 'photo_defaults.jpg',
+                                'created_by'    => auth::user()->id,
+                                'created_at'    => Carbon::now(),
+                            ]);
+
+                        $insert_bio = DB::table('employees')
+                            ->insert([
+                                'name'          => $name,
+                                'position'      => $job_level,
+                                'organization'  => $organization,
+                                'join_date'     => $join_date,
+                                'employee_type' => $employee_type,
+                                'email'         => $email,
+                                'phone'         => $phone,
+                                'employee_id'   => $code.$insert,
+                                'created_by'    => auth::user()->id,
+                                'created_at'    => Carbon::now(),
+                            ]);
+
+                        $update = DB::table('users')
+                            ->where('id', $insert)
+                            ->limit(1)
+                            ->update([
+                                'rec_id' => $code.$insert,
+                            ]);
+
+                    // } else {
+                        // $error = "Password must be 6 character";
+                    // }
+                }else{
+                    $error = "Email Has Been Used";
+                }
+
+            }
+
+            if ($error) {
+                DB::rollback();
+                Toastr::error($error,'Error');
+                return redirect()->back();                
+            }else{
+                DB::commit();
+                Toastr::success('Add new employee successfully :)','Success');
+                return redirect()->route('all/employee/card');
+            }
+
+        }catch(\Exception $e){
+            DB::rollback();
+            Toastr::error('Import new employee fail :)','Error');
+            return redirect()->back();
+        }
+
     }
     // view edit record
     public function viewRecord($employee_id)

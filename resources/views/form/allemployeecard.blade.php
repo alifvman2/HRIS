@@ -161,6 +161,7 @@
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
+                        <a href="#" class="btn add-btn ml-1" data-toggle="modal" data-target="#import_employee"><i class="fa fa-plus"></i> Import Employee</a>
                         <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Employee</a>
                         <div class="view-icons">
                             <a href="{{ route('all/employee/card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
@@ -352,6 +353,50 @@
             </div>
         </div>
         <!-- /Add Employee Modal -->
+        <!-- Import Employee Modal -->
+        <div id="import_employee" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Import Employee</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('all/employee/import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-form-label">File Template</label>
+                                    </div>
+                                </div>                                
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        : <a href="{{ URL::to('assets/file/employee.xlsx') }}" class="btn btn-success">download</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-form-label">File Upload</label>
+                                    </div>
+                                </div>                                
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        : <input type="file" name="file" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Import Employee Modal -->
         
     </div>
     <!-- /Page Wrapper -->
