@@ -16,7 +16,7 @@
         "laravel/ui": "^3.3",
         "laraveldaily/laravel-invoices": "^2.2",
         "phpoffice/phpspreadsheet": "^1.26",
-        "adamkearsley/convert-migrations": "dev-master"
+        "reliese/laravel": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

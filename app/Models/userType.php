@@ -1,11 +1,29 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class userType extends Model
+/**
+ * Class UserType
+ * 
+ * @property int $id
+ * @property string|null $type_name
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ *
+ * @package App\Models
+ */
+class UserType extends Model
 {
-    use HasFactory;
+	protected $table = 'user_types';
+
+	protected $fillable = [
+		'type_name'
+	];
 }

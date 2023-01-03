@@ -1,15 +1,31 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Holiday
+ * 
+ * @property int $id
+ * @property string|null $name_holiday
+ * @property string|null $date_holiday
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ *
+ * @package App\Models
+ */
 class Holiday extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'name_holiday',
-        'date_holiday',
-    ];
+	protected $table = 'holidays';
+
+	protected $fillable = [
+		'name_holiday',
+		'date_holiday'
+	];
 }

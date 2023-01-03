@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
+    <!-- <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
@@ -19,7 +19,23 @@
                             <li><a href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
-                    @if (Auth::user()->role_name=='Admin')
+                    @if (Auth::user()->role_name=='Super Admin')
+                        <li class="submenu"> <a href="#"><i class="fa fa-building"></i> <span> Organization</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a class="active" href="{{ route('Org.company') }}">Company Setting</a></li>
+                                <li><a href="">Employment Type</a></li>
+                                <li><a href="">Grade</a></li>
+                                <li><a href="">Rank</a></li>
+                                <li><a href="">Job Class</a></li>
+                                <li><a href="">Organization Level</a></li>
+                                <li><a href="">Organization Structure</a></li>
+                                <li><a href="">Job Level</a></li>
+                                <li><a href="">Position</a></li>
+                                <li><a href="">Work Location</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if (Auth::user()->role_name=='Admin' || Auth::user()->role_name=='Super Admin')
                         <li class="menu-title"> <span>Authentication</span> </li>
                         <li class="submenu">
                             <a href="#">
@@ -142,7 +158,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- /Sidebar -->
 
     <!-- Page Wrapper -->
@@ -160,6 +176,7 @@
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
+                        <a href="#" class="btn add-btn ml-1" data-toggle="modal" data-target="#import_employee"><i class="fa fa-plus"></i> Import Employee</a>
                         <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Employee</a>
                         <div class="view-icons">
                             <a href="{{ route('all/employee/card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
@@ -266,29 +283,46 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-form-label">Full Name</label>
-                                        <select class="select" id="name" name="name">
-                                            <option value="">-- Select --</option>
-                                            @foreach ($userList as $key=>$user )
-                                                <option value="{{ $user->name }}" data-employee_id={{ $user->rec_id }} data-email={{ $user->email }}>{{ $user->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <input class="form-control" type="text" id="name" name="name" placeholder="Full Name">
                                     </div>
                                 </div>
                             
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="col-form-label">Email <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" id="email" name="email" placeholder="Auto email" readonly>
+                                        <input class="form-control" type="email" id="email" name="email" placeholder="Auto email">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-sm-6">  
+                                    <div class="form-group">
+                                        <label class="col-form-label">Organization</label>
+                                        <select class="select" style="width: 100%;" tabindex="-1" aria-hidden="true" id="organization" name="organization">
+                                            <option value="">-- Select --</option>
+                                            @foreach ($organization as $key => $org )
+                                                <option value="{{ $org->id }}">{{ $org->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">  
+                                    <div class="form-group">
+                                        <label>Job Level</label>
+                                        <select class="select form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" id="jobLevel" name="jobLevel">
+                                            <option value="">-- Select --</option>
+                                            @foreach ($jobLevel as $key => $job_level )
+                                                <option value="{{ $job_level->id }}">{{ $job_level->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Birth Date</label>
                                         <div class="cal-icon">
-                                            <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate">
+                                            <input class="form-control datetimepicker" type="text" id="birthDate" name="birthDate" onblur="age()">
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Gender</label>
@@ -296,12 +330,6 @@
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">  
-                                    <div class="form-group">
-                                        <label class="col-form-label">Employee ID <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="employee_id" name="employee_id" placeholder="Auto id employee" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -376,6 +404,51 @@
             </div>
         </div>
         <!-- /Add Employee Modal -->
+        <!-- Import Employee Modal -->
+        <div id="import_employee" class="modal custom-modal fade" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Import Employee</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('all/employee/import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-form-label">File Template</label>
+                                    </div>
+                                </div>                                
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        : <a href="{{ URL::to('assets/file/employee.xlsx') }}" class="btn btn-success">download</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="col-form-label">File Upload</label>
+                                    </div>
+                                </div>                                
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        : <input type="file" name="file" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="submit-section">
+                                <button class="btn btn-primary submit-btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Import Employee Modal -->
+        
     </div>
     <!-- /Page Wrapper -->
     @section('script')
@@ -397,11 +470,33 @@
     </script>
     <script>
         // select auto id and email
-        $('#name').on('change',function()
-        {
-            $('#employee_id').val($(this).find(':selected').data('employee_id'));
-            $('#email').val($(this).find(':selected').data('email'));
-        });
+        // $('#name').on('change',function()
+        // {
+        //     $('#employee_id').val($(this).find(':selected').data('employee_id'));
+        //     $('#email').val($(this).find(':selected').data('email'));
+        // });
+        function age() {
+
+            var birthDate = document.getElementById("birthDate").value;
+            // console.log(birthDate);
+            $('#birthDate').datetimepicker({
+                    onSelect: function(value, ui) {
+                        var today = new Date(),
+                            dob = new Date(value),
+                            age = new Date(today - dob).getFullYear() - 1970;
+                        console.log(age)
+                        $('#age').text(age);
+                    },
+                    maxDate: '+0d',
+                    yearRange: '1920:2010',
+                    changeMonth: true,
+                    changeYear: true
+            })
+
+            // $age = \Carbon\Carbon::parse($birthDate)->diff(\Carbon\Carbon::now())->format('%y years, %m months and %d days');
+            // console.log($age);
+
+        }
     </script>
     @endsection
 @endsection

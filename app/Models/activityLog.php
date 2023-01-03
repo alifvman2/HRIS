@@ -1,11 +1,35 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class activityLog extends Model
+/**
+ * Class ActivityLog
+ * 
+ * @property int $id
+ * @property string|null $name
+ * @property string|null $email
+ * @property string|null $description
+ * @property string|null $date_time
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ *
+ * @package App\Models
+ */
+class ActivityLog extends Model
 {
-    use HasFactory;
+	protected $table = 'activity_logs';
+
+	protected $fillable = [
+		'name',
+		'email',
+		'description',
+		'date_time'
+	];
 }

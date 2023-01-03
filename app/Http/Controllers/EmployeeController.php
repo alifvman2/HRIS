@@ -15,6 +15,9 @@ use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 use Illuminate\Support\Facades\Hash;
+use Session;
+use App\Models\JobLevel;
+use App\Models\OrganizationLevel;
 
 class EmployeeController extends Controller
 {
@@ -27,7 +30,11 @@ class EmployeeController extends Controller
                     ->get();
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
-        return view('form.employeelist',compact('users','userList','permission_lists'));
+        $jobLevel = JobLevel::get();
+        $organization = OrganizationLevel::get();
+
+        Session::put('MENU', 'allEmployees');
+        return view('form.employeelist',compact('users','userList','permission_lists','jobLevel','organization'));
     }
     // all employee card view
     public function cardAllEmployee(Request $request)
@@ -38,7 +45,11 @@ class EmployeeController extends Controller
                     ->get(); 
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
-        return view('form.allemployeecard',compact('users','userList','permission_lists'));
+        $jobLevel = JobLevel::get();
+        $organization = OrganizationLevel::get();
+
+        Session::put('MENU', 'allEmployees');
+        return view('form.allemployeecard',compact('users','userList','permission_lists','jobLevel','organization'));
     }
 
     // save data employee

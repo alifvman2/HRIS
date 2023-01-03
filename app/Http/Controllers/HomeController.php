@@ -7,6 +7,8 @@ use DB;
 use Carbon\Carbon;
 use PDF;
 use App\Models\User;
+use Session;
+
 class HomeController extends Controller
 {
     /**
@@ -27,13 +29,21 @@ class HomeController extends Controller
     // main dashboard
     public function index()
     {
-        return view('dashboard.dashboard');
+
+        $user = User::whereNull('deleted_by')
+            ->count();
+
+        Session::put('MENU', 'dashboard');
+        return view('dashboard.dashboard')->with([
+            'user'  => $user,
+        ]);
     }
     // employee dashboard
     public function emDashboard()
     {
         $dt        = Carbon::now();
         $todayDate = $dt->toDayDateTimeString();
+        Session::put('MENU', 'emdashboard');
         return view('dashboard.emdashboard',compact('todayDate'));
     }
 

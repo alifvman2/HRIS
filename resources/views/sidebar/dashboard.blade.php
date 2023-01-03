@@ -10,6 +10,35 @@
                             <li><a href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
+                    @if (Auth::user()->role_name=='Super Admin')
+                        <li class="submenu"> <a href="#"><i class="fa fa-building"></i> <span> Organization</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a class="active" href="{{ route('Org.company') }}">Company Setting</a></li>
+                                <li><a href="">Employment Type</a></li>
+                                <li><a href="">Grade</a></li>
+                                <li><a href="">Rank</a></li>
+                                <li><a href="">Job Class</a></li>
+                                <li><a href="">Organization Level</a></li>
+                                <li><a href="">Organization Structure</a></li>
+                                <li><a href="">Job Level</a></li>
+                                <li><a href="">Position</a></li>
+                                <li><a href="">Work Location</a></li>
+                            </ul>
+                        </li>
+                    @endif
+                    @if (Auth::user()->role_name=='Admin' || Auth::user()->role_name=='Super Admin')
+                        <li class="menu-title"> <span>Authentication</span> </li>
+                        <li class="submenu">
+                            <a href="#">
+                                <i class="la la-user-secret"></i> <span> User Controller</span> <span class="menu-arrow"></span>
+                            </a>
+                            <ul style="display: none;">
+                                <li><a href="{{ route('userManagement') }}">All User</a></li>
+                                <li><a href="{{ route('activity/log') }}">Activity Log</a></li>
+                                <li><a href="{{ route('activity/login/logout') }}">Activity User</a></li>
+                            </ul>
+                        </li>
+                    @endif
                     <li class="menu-title"> <span>Employees</span> </li>
                     <li class="submenu"> <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">

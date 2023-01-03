@@ -178,3 +178,16 @@ Route::post('form/training/type/save', [App\Http\Controllers\TrainingTypeControl
 Route::post('form//training/type/update', [App\Http\Controllers\TrainingTypeController::class, 'updateRecord'])->middleware('auth')->name('form//training/type/update');
 Route::post('form//training/type/delete', [App\Http\Controllers\TrainingTypeController::class, 'deleteTrainingType'])->middleware('auth')->name('form//training/type/delete');
 
+Route::group(['prefix' => 'Organization', 'as' => 'Org.', 'middleware' => ['auth']], function () {
+
+    // COMPANY SETTING START
+    Route::get('/company','CompanyController@index')->name('company');
+    Route::get('/company/create','CompanyController@create');
+    Route::post('/company','CompanyController@store');
+    Route::get('/company/{id}','CompanyController@show');
+    Route::get('/company/{id}/edit','CompanyController@edit');
+    Route::put('/company/{id}','CompanyController@update');
+    Route::delete('/company/{id}','CompanyController@destroy');
+
+    // COMPANY SETTING END
+});
