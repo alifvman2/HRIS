@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Session;
 use App\Models\JobLevel;
 use App\Models\OrganizationLevel;
+use App\Models\EmployeeType;
 
 class EmployeeController extends Controller
 {
@@ -32,9 +33,10 @@ class EmployeeController extends Controller
         $permission_lists = DB::table('permission_lists')->get();
         $jobLevel = JobLevel::get();
         $organization = OrganizationLevel::get();
+        $employee_type = EmployeeType::get();
 
         Session::put('MENU', 'allEmployees');
-        return view('form.employeelist',compact('users','userList','permission_lists','jobLevel','organization'));
+        return view('form.employeelist',compact('users','userList','permission_lists','jobLevel','organization','employee_type'));
     }
     // all employee card view
     public function cardAllEmployee(Request $request)
@@ -47,9 +49,10 @@ class EmployeeController extends Controller
         $permission_lists = DB::table('permission_lists')->get();
         $jobLevel = JobLevel::get();
         $organization = OrganizationLevel::get();
+        $employee_type = EmployeeType::get();
 
         Session::put('MENU', 'allEmployees');
-        return view('form.allemployeecard',compact('users','userList','permission_lists','jobLevel','organization'));
+        return view('form.allemployeecard',compact('users','userList','permission_lists','jobLevel','organization','employee_type'));
     }
 
     // save data employee

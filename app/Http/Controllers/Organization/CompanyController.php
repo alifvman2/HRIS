@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Organization;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
+use App\Models\Company;
+use DB;
 
 class CompanyController extends Controller
 {
@@ -15,9 +18,10 @@ class CompanyController extends Controller
     public function index()
     {
 
-        Session::put('MENU', 'company');
-        return view('organization.company.index');
+        $company = Company::whereNull('deleted_by')->get();
 
+        Session::put('MENU', 'company');
+        return view('organization.company.index',compact('company'));
     }
 
     /**

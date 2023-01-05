@@ -181,13 +181,24 @@ Route::post('form//training/type/delete', [App\Http\Controllers\TrainingTypeCont
 Route::group(['prefix' => 'Organization', 'as' => 'Org.', 'middleware' => ['auth']], function () {
 
     // COMPANY SETTING START
-    Route::get('/company','CompanyController@index')->name('company');
-    Route::get('/company/create','CompanyController@create');
-    Route::post('/company','CompanyController@store');
-    Route::get('/company/{id}','CompanyController@show');
-    Route::get('/company/{id}/edit','CompanyController@edit');
-    Route::put('/company/{id}','CompanyController@update');
-    Route::delete('/company/{id}','CompanyController@destroy');
-
+    Route::get('/company','Organization\CompanyController@index')->name('company');
+    Route::get('/company/create','Organization\CompanyController@create');
+    Route::post('/company','Organization\CompanyController@store');
+    Route::get('/company/{id}','Organization\CompanyController@show');
+    Route::get('/company/{id}/edit','Organization\CompanyController@edit');
+    Route::put('/company/{id}','Organization\CompanyController@update');
+    Route::delete('/company/{id}','Organization\CompanyController@destroy');
     // COMPANY SETTING END
+
+    // EMPLOYMENT TYPE START
+    Route::get('/employmentType','Organization\EmploymentTypeController@index')->name('employmentType');
+    Route::get('/employmentType/create','Organization\EmploymentTypeController@create');
+    Route::post('/employmentType','Organization\EmploymentTypeController@store');
+    Route::get('/employmentType/{id}','Organization\EmploymentTypeController@show');
+    Route::get('/employmentType/{id}/edit','Organization\EmploymentTypeController@edit');
+    Route::put('/employmentType/{id}','Organization\EmploymentTypeController@update');
+    Route::delete('/employmentType/{id}','Organization\EmploymentTypeController@destroy');
+    // EMPLOYMENT TYPE END
+
+
 });

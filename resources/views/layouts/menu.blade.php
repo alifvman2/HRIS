@@ -14,7 +14,7 @@
                         <li class="submenu"> <a href="#"><i class="fa fa-building"></i> <span> Organization</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a class="{{ Session::Get('MENU') == 'company' ? 'active' : '' }}" href="{{ route('Org.company') }}">Company Setting</a></li>
-                                <li><a  class="{{ Session::Get('MENU') == 'employmentType' ? 'active' : '' }}" href="">Employment Type</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'employmentType' ? 'active' : '' }}" href="{{ route('Org.employmentType') }}">Employment Type</a></li>
                                 <li><a  class="{{ Session::Get('MENU') == 'grade' ? 'active' : '' }}" href="">Grade</a></li>
                                 <li><a  class="{{ Session::Get('MENU') == 'rank' ? 'active' : '' }}" href="">Rank</a></li>
                                 <li><a  class="{{ Session::Get('MENU') == 'jobClass' ? 'active' : '' }}" href="">Job Class</a></li>
