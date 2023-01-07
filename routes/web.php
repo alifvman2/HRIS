@@ -200,5 +200,54 @@ Route::group(['prefix' => 'Organization', 'as' => 'Org.', 'middleware' => ['auth
     Route::delete('/employmentType/{id}','Organization\EmploymentTypeController@destroy');
     // EMPLOYMENT TYPE END
 
+    // GRADE START
+    Route::get('/grade','Organization\GradeController@index')->name('grade');
+    Route::get('/grade/create','Organization\GradeController@create');
+    Route::post('/grade','Organization\GradeController@store');
+    Route::get('/grade/{id}','Organization\GradeController@show');
+    Route::get('/grade/{id}/edit','Organization\GradeController@edit');
+    Route::put('/grade/{id}','Organization\GradeController@update');
+    Route::delete('/grade/{id}','Organization\GradeController@destroy');
+    // GRADE END
+
+    // RANK START
+    Route::get('/rank','Organization\RankController@index')->name('rank');
+    Route::get('/rank/create','Organization\RankController@create');
+    Route::post('/rank','Organization\RankController@store');
+    Route::get('/rank/{id}','Organization\RankController@show');
+    Route::get('/rank/{id}/edit','Organization\RankController@edit');
+    Route::put('/rank/{id}','Organization\RankController@update');
+    Route::delete('/rank/{id}','Organization\RankController@destroy');
+    // RANK END
+
+    // JOB CLASS START
+    Route::get('/jobClass','Organization\JobClassController@index')->name('jobClass');
+    Route::get('/jobClass/create','Organization\JobClassController@create');
+    Route::post('/jobClass','Organization\JobClassController@store');
+    Route::get('/jobClass/{id}','Organization\JobClassController@show');
+    Route::get('/jobClass/{id}/edit','Organization\JobClassController@edit');
+    Route::put('/jobClass/{id}','Organization\JobClassController@update');
+    Route::delete('/jobClass/{id}','Organization\JobClassController@destroy');
+    // JOB CLASS END
+
+    // ORGANIZATION LEVEL START
+    Route::get('/organizationLevel','Organization\OrganizationLevelController@index')->name('organizationLevel');
+    Route::get('/organizationLevel/create','Organization\OrganizationLevelController@create');
+    Route::post('/organizationLevel','Organization\OrganizationLevelController@store');
+    Route::get('/organizationLevel/{id}','Organization\OrganizationLevelController@show');
+    Route::get('/organizationLevel/{id}/edit','Organization\OrganizationLevelController@edit');
+    Route::put('/organizationLevel/{id}','Organization\OrganizationLevelController@update');
+    Route::delete('/organizationLevel/{id}','Organization\OrganizationLevelController@destroy');
+    // ORGANIZATION LEVEL END
+
+    // ORGANIZATION LEVEL START
+    Route::get('/organizationStructure','Organization\OrganizationStructureController@index')->name('organizationStructure');
+    Route::get('/organizationStructure/create','Organization\OrganizationStructureController@create');
+    Route::post('/organizationStructure','Organization\OrganizationStructureController@store');
+    Route::get('/organizationStructure/{id}','Organization\OrganizationStructureController@show');
+    Route::get('/organizationStructure/{id}/edit','Organization\OrganizationStructureController@edit');
+    Route::put('/organizationStructure/{id}','Organization\OrganizationStructureController@update');
+    Route::delete('/organizationStructure/{id}','Organization\OrganizationStructureController@destroy');
+    // ORGANIZATION LEVEL END
 
 });

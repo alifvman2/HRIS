@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Organization;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
-use App\Models\EmployeeType;
+use App\Models\Rank;
 use DB;
 
-class EmploymentType extends Controller
+class RankController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,10 @@ class EmploymentType extends Controller
     public function index()
     {
 
-        $employee = EmployeeType::whereNull('deleted_by')->get();
-
-        Session::put('MENU', 'employmentType');
-        return view('organization.employmentType.index',compact('employee'));
+        $data = Rank::whereNull('deleted_by')->get();
+        
+        Session::put('MENU', 'rank');
+        return view('organization.rank.index',compact('data'));
 
     }
 

@@ -1,5 +1,6 @@
 @extends('layouts.main')
-@section('title', 'Company Setting')
+
+@section('title', 'Rank')
 @section('content')
 
     <!-- Page Wrapper -->
@@ -10,15 +11,15 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Company Setting</h3>
+                        <h3 class="page-title">Rank</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Company Setting</li>
+                            <li class="breadcrumb-item active">Rank</li>
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
                         <!-- <a href="#" class="btn add-btn ml-1" data-toggle="modal" data-target="#import_employee"><i class="fa fa-plus"></i> Import Employee</a> -->
-                        <a href="#" class="btn add-btn"><i class="fa fa-plus"></i> Add Company</a>
+                        <a href="#" class="btn add-btn"><i class="fa fa-plus"></i> Add</a>
                         <!-- <div class="view-icons">
                             <a href="{{ route('all/employee/card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
                             <a href="{{ route('all/employee/list') }}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
@@ -66,25 +67,25 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Company Code</th>
-                                    <th>Company Name</th>
-                                    <th>Phone</th>
-                                    <th>Fax</th>
-                                    <th>Email</th>
-                                    <th>Tax Number</th>
+                                    <th>Rank Code</th>
+                                    <th>Rank Name</th>
+                                    <th>Keterangan</th>
+                                    <!-- <th>Fax</th> -->
+                                    <!-- <th>Email</th> -->
+                                    <!-- <th>Tax Number</th> -->
                                     <th class="text-right no-sort">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            	@foreach($company as $key => $com)
+                            	@foreach($data as $key => $dat)
                             		<tr>
                             			<td>{{ $loop->iteration }}</td>
-                            			<td>{{ $com->code }}</td>
-                            			<td>{{ $com->name }}</td>
-                            			<td>{{ $com->phone }}</td>
-                            			<td>{{ $com->fax }}</td>
-                            			<td>{{ $com->email }}</td>
-                            			<td>{{ $com->npwp }}</td>
+                            			<td>{{ $dat->code }}</td>
+                            			<td>{{ $dat->name }}</td>
+                            			<td>{{ $dat->keterangan }}</td>
+                            			<!-- <td>{{ $dat->code }}</td> -->
+                            			<!-- <td>{{ $dat->code }}</td> -->
+                            			<!-- <td>{{ $dat->code }}</td> -->
                             			<td></td>
                             		</tr>
                             	@endforeach

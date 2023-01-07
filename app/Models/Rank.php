@@ -11,13 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class OrganizationStructure
+ * Class Rank
  * 
  * @property int $id
  * @property string|null $code
  * @property string|null $name
- * @property int|null $company
- * @property int|null $organization_level
+ * @property string|null $order
  * @property string|null $keterangan
  * @property int $created_by
  * @property Carbon $created_at
@@ -28,14 +27,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models
  */
-class OrganizationStructure extends Model
+class Rank extends Model
 {
 	use SoftDeletes;
-	protected $table = 'organization_structure';
+	protected $table = 'rank';
 
 	protected $casts = [
-		'company' => 'int',
-		'organization_level' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int',
 		'deleted_by' => 'int'
@@ -44,8 +41,7 @@ class OrganizationStructure extends Model
 	protected $fillable = [
 		'code',
 		'name',
-		'company',
-		'organization_level',
+		'order',
 		'keterangan',
 		'created_by',
 		'updated_by',

@@ -15,11 +15,11 @@
                             <ul style="display: none;">
                                 <li><a class="{{ Session::Get('MENU') == 'company' ? 'active' : '' }}" href="{{ route('Org.company') }}">Company Setting</a></li>
                                 <li><a  class="{{ Session::Get('MENU') == 'employmentType' ? 'active' : '' }}" href="{{ route('Org.employmentType') }}">Employment Type</a></li>
-                                <li><a  class="{{ Session::Get('MENU') == 'grade' ? 'active' : '' }}" href="">Grade</a></li>
-                                <li><a  class="{{ Session::Get('MENU') == 'rank' ? 'active' : '' }}" href="">Rank</a></li>
-                                <li><a  class="{{ Session::Get('MENU') == 'jobClass' ? 'active' : '' }}" href="">Job Class</a></li>
-                                <li><a  class="{{ Session::Get('MENU') == 'organizationLevel' ? 'active' : '' }}" href="">Organization Level</a></li>
-                                <li><a  class="{{ Session::Get('MENU') == 'organizationStructure' ? 'active' : '' }}" href="">Organization Structure</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'grade' ? 'active' : '' }}" href="{{ route('Org.grade') }}">Grade</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'rank' ? 'active' : '' }}" href="{{ route('Org.rank') }}">Rank</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'jobClass' ? 'active' : '' }}" href="{{ route('Org.jobClass') }}">Job Class</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'organizationLevel' ? 'active' : '' }}" href="{{ route('Org.organizationLevel') }}">Organization Level</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'organizationStructure' ? 'active' : '' }}" href="{{ route('Org.organizationStructure') }}">Organization Structure</a></li>
                                 <li><a  class="{{ Session::Get('MENU') == 'jobLevel' ? 'active' : '' }}" href="">Job Level</a></li>
                                 <li><a  class="{{ Session::Get('MENU') == 'position' ? 'active' : '' }}" href="">Position</a></li>
                                 <li><a  class="{{ Session::Get('MENU') == 'workLocation' ? 'active' : '' }}" href="">Work Location</a></li>

@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $address
  * @property string|null $city
  * @property string|null $zip_code
- * @property int|null $county
+ * @property int|null $country
  * @property string|null $phone
  * @property string|null $fax
  * @property string|null $email
@@ -50,11 +50,9 @@ class Company extends Model
 {
 	use SoftDeletes;
 	protected $table = 'company';
-	public $incrementing = false;
 
 	protected $casts = [
-		'id' => 'int',
-		'county' => 'int',
+		'country' => 'int',
 		'bank' => 'int',
 		'tax_locations' => 'int',
 		'bpjs_ketenagakerjaan' => 'int',
@@ -72,7 +70,7 @@ class Company extends Model
 		'address',
 		'city',
 		'zip_code',
-		'county',
+		'country',
 		'phone',
 		'fax',
 		'email',

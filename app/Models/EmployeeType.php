@@ -14,10 +14,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class EmployeeType
  * 
  * @property int $id
- * @property string|null $type
+ * @property string|null $code
  * @property string|null $name
  * @property string|null $status
- * @property int|null $order
+ * @property string|null $order
  * @property string|null $keterangan
  * @property int $created_by
  * @property Carbon $created_at
@@ -34,14 +34,13 @@ class EmployeeType extends Model
 	protected $table = 'employee_type';
 
 	protected $casts = [
-		'order' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int',
 		'deleted_by' => 'int'
 	];
 
 	protected $fillable = [
-		'type',
+		'code',
 		'name',
 		'status',
 		'order',
