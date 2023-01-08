@@ -20,9 +20,9 @@
                                 <li><a  class="{{ Session::Get('MENU') == 'jobClass' ? 'active' : '' }}" href="{{ route('Org.jobClass') }}">Job Class</a></li>
                                 <li><a  class="{{ Session::Get('MENU') == 'organizationLevel' ? 'active' : '' }}" href="{{ route('Org.organizationLevel') }}">Organization Level</a></li>
                                 <li><a  class="{{ Session::Get('MENU') == 'organizationStructure' ? 'active' : '' }}" href="{{ route('Org.organizationStructure') }}">Organization Structure</a></li>
-                                <li><a  class="{{ Session::Get('MENU') == 'jobLevel' ? 'active' : '' }}" href="">Job Level</a></li>
-                                <li><a  class="{{ Session::Get('MENU') == 'position' ? 'active' : '' }}" href="">Position</a></li>
-                                <li><a  class="{{ Session::Get('MENU') == 'workLocation' ? 'active' : '' }}" href="">Work Location</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'jobLevel' ? 'active' : '' }}" href="{{ route('Org.jobLevel') }}">Job Level</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'position' ? 'active' : '' }}" href="{{ route('Org.position') }}">Position</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'workLocation' ? 'active' : '' }}" href="{{ route('Org.workLocation') }}">Work Location</a></li>
                             </ul>
                         </li>
                     @endif

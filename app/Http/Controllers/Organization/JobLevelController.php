@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Organization;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
-use App\Models\Grade;
 use DB;
+use App\Models\JobLevel;
+use App\Models\JobClass;
 
-class GradeController extends Controller
+class JobLevelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +19,38 @@ class GradeController extends Controller
     public function index()
     {
 
-        $data = Grade::whereNull('deleted_by')->orderBy('order')->get();
+        $data = JobLevel::whereNull('deleted_by')->orderBy('order')->get();
 
-        Session::put('MENU', 'grade');
-        return view('organization.grade.index',compact('data'));
-        
+        for ($i=0; $i < count($data); $i++) { 
+            
+            $id_class = explode(', ', $data[$i]->job_class);
+            
+            for ($a=0; $a < count($id_class); $a++) { 
+                
+                $job_class = JobClass::select('grade.name as grades', 'rank.name as ranks')
+                    ->where('job_class.id', $id_class[$a])
+                    ->whereNull('job_class.deleted_at')
+                    ->Join('grade', function ($join) {
+                        $join->on('job_class.grade', '=', 'grade.id')
+                            ->whereNull('grade.deleted_at');
+                    })
+                    ->Join('rank', function ($join) {
+                        $join->on('job_class.rank', '=', 'rank.id')
+                            ->whereNull('job_class.deleted_at');
+                    })
+                    ->first();
+
+                $result[$a] = $job_class->grades.$job_class->ranks;
+
+            }
+
+            $data[$i]->job_class = implode(", ",$result);
+
+        }
+
+        Session::put('MENU', 'jobLevel');
+        return view('organization.jobLevel.index',compact('data'));
+
     }
 
     /**

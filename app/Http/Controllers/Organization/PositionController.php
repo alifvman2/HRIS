@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Organization;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
-use App\Models\Grade;
 use DB;
+use App\Models\Position;
 
-class GradeController extends Controller
+class PositionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,21 @@ class GradeController extends Controller
     public function index()
     {
 
-        $data = Grade::whereNull('deleted_by')->orderBy('order')->get();
+        $data = Position::select('position.id', 'position.code', 'position.name', 'position.act_as_head', 'job_level.name as job_levels', 'organization_structure.name as organization_structures')
+            ->whereNull('position.deleted_by')
+            ->Join('job_level', function ($join) {
+                $join->on('position.job_level', '=', 'job_level.id')
+                    ->whereNull('job_level.deleted_at');
+            })
+            ->Join('organization_structure', function ($join) {
+                $join->on('position.organization_structure', '=', 'organization_structure.id')
+                    ->whereNull('organization_structure.deleted_at');
+            })
+            ->get();
 
-        Session::put('MENU', 'grade');
-        return view('organization.grade.index',compact('data'));
-        
+        Session::put('MENU', 'position');
+        return view('organization.position.index',compact('data'));
+
     }
 
     /**

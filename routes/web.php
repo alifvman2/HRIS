@@ -240,7 +240,7 @@ Route::group(['prefix' => 'Organization', 'as' => 'Org.', 'middleware' => ['auth
     Route::delete('/organizationLevel/{id}','Organization\OrganizationLevelController@destroy');
     // ORGANIZATION LEVEL END
 
-    // ORGANIZATION LEVEL START
+    // ORGANIZATION STRUCTURE START
     Route::get('/organizationStructure','Organization\OrganizationStructureController@index')->name('organizationStructure');
     Route::get('/organizationStructure/create','Organization\OrganizationStructureController@create');
     Route::post('/organizationStructure','Organization\OrganizationStructureController@store');
@@ -248,6 +248,36 @@ Route::group(['prefix' => 'Organization', 'as' => 'Org.', 'middleware' => ['auth
     Route::get('/organizationStructure/{id}/edit','Organization\OrganizationStructureController@edit');
     Route::put('/organizationStructure/{id}','Organization\OrganizationStructureController@update');
     Route::delete('/organizationStructure/{id}','Organization\OrganizationStructureController@destroy');
-    // ORGANIZATION LEVEL END
+    // ORGANIZATION STRUCTURE END
+
+    // JOB LEVEL START
+    Route::get('/jobLevel','Organization\JobLevelController@index')->name('jobLevel');
+    Route::get('/jobLevel/create','Organization\JobLevelController@create');
+    Route::post('/jobLevel','Organization\JobLevelController@store');
+    Route::get('/jobLevel/{id}','Organization\JobLevelController@show');
+    Route::get('/jobLevel/{id}/edit','Organization\JobLevelController@edit');
+    Route::put('/jobLevel/{id}','Organization\JobLevelController@update');
+    Route::delete('/jobLevel/{id}','Organization\JobLevelController@destroy');
+    // JOB LEVEL END
+
+    // POSITION START
+    Route::get('/position','Organization\PositionController@index')->name('position');
+    Route::get('/position/create','Organization\PositionController@create');
+    Route::post('/position','Organization\PositionController@store');
+    Route::get('/position/{id}','Organization\PositionController@show');
+    Route::get('/position/{id}/edit','Organization\PositionController@edit');
+    Route::put('/position/{id}','Organization\PositionController@update');
+    Route::delete('/position/{id}','Organization\PositionController@destroy');
+    // POSITION END
+
+    // WORK LOCATION START
+    Route::get('/workLocation','Organization\WorkLocationController@index')->name('workLocation');
+    Route::get('/workLocation/create','Organization\WorkLocationController@create');
+    Route::post('/workLocation','Organization\WorkLocationController@store');
+    Route::get('/workLocation/{id}','Organization\WorkLocationController@show');
+    Route::get('/workLocation/{id}/edit','Organization\WorkLocationController@edit');
+    Route::put('/workLocation/{id}','Organization\WorkLocationController@update');
+    Route::delete('/workLocation/{id}','Organization\WorkLocationController@destroy');
+    // WORK LOCATION END
 
 });

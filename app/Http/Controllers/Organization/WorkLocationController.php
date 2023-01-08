@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Organization;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
-use App\Models\Grade;
 use DB;
+use App\Models\WorkLocation;
 
-class GradeController extends Controller
+class WorkLocationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,11 @@ class GradeController extends Controller
     public function index()
     {
 
-        $data = Grade::whereNull('deleted_by')->orderBy('order')->get();
+        $data = WorkLocation::whereNull('deleted_by')->get();
 
-        Session::put('MENU', 'grade');
-        return view('organization.grade.index',compact('data'));
-        
+        Session::put('MENU', 'workLocation');
+        return view('organization.workLocation.index',compact('data'));
+
     }
 
     /**
