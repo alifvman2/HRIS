@@ -69,7 +69,7 @@
                                     <th>Position</th>
                                     <th>Organization</th>
                                     <th class="text-nowrap">Join Date</th>
-                                    <th>Employment Type</th>
+                                    <th>Employment Type</th> 
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th class="text-right no-sort">Action</th>
