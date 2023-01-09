@@ -64,29 +64,33 @@
                         <table class="table table-striped custom-table datatable">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Employee ID</th>
-                                    <th>Email</th>
-                                    <th>Mobile</th>
+                                    <th>Employee No</th>
+                                    <th>Employee Name</th>
+                                    <th>Position</th>
+                                    <th>Organization</th>
                                     <th class="text-nowrap">Join Date</th>
-                                    <th>Role</th>
+                                    <th>Employment Type</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
                                     <th class="text-right no-sort">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($users as $items )
                                 <tr>
+                                    <td>{{ $items->rec_id }}</td>
                                     <td>
                                         <h2 class="table-avatar">
                                             <a href="{{ url('employee/profile/'.$items->rec_id) }}" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $items->avatar) }}"></a>
                                             <a href="{{ url('employee/profile/'.$items->rec_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
                                         </h2>
                                     </td>
-                                    <td>{{ $items->rec_id }}</td>
+                                    <td>{{ $items->positions }}</td>
+                                    <td>{{ $items->organizations }}</td>
+                                    <td>{{ $items->join_date }}</td>
+                                    <td>{{ $items->employee_types }}</td>
                                     <td>{{ $items->email }}</td>
                                     <td>{{ $items->phone_number }}</td>
-                                    <td>{{ $items->join_date }}</td>
-                                    <td>{{ $items->role_name }}</td>
                                     <td class="text-right">
                                         <div class="dropdown dropdown-action">
                                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>

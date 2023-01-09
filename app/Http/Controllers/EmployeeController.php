@@ -26,9 +26,29 @@ class EmployeeController extends Controller
     public function listAllEmployee()
     {
         $users = DB::table('users')
-                    ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
-                    ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                    ->get();
+            ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
+            ->Join('position', function ($join) {
+                $join->on('employees.position', '=', 'position.id')
+                    ->whereNull('position.deleted_at');
+            })
+            ->Join('organization_structure', function ($join) {
+                $join->on('employees.organization', '=', 'organization_structure.id')
+                    ->whereNull('organization_structure.deleted_at');
+            })
+            ->Join('employee_type', function ($join) {
+                $join->on('employees.employee_type', '=', 'employee_type.id')
+                    ->whereNull('employee_type.deleted_at');
+            })
+            ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company', 'employees.join_date', 'position.name as positions', 'organization_structure.name as organizations', 'employee_type.name as employee_types')
+            ->get();
+
+        for ($i=0; $i < count($users); $i++) { 
+
+            $join_date = Carbon::create($users[$i]->join_date);
+
+            $users[$i]->join_date = $join_date->toDayDateTimeString();
+        }
+
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
         $jobLevel = JobLevel::get();
@@ -42,9 +62,29 @@ class EmployeeController extends Controller
     public function cardAllEmployee(Request $request)
     {
         $users = DB::table('users')
-                    ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
-                    ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company')
-                    ->get(); 
+            ->join('employees', 'users.rec_id', '=', 'employees.employee_id')
+            ->Join('position', function ($join) {
+                $join->on('employees.position', '=', 'position.id')
+                    ->whereNull('position.deleted_at');
+            })
+            ->Join('organization_structure', function ($join) {
+                $join->on('employees.organization', '=', 'organization_structure.id')
+                    ->whereNull('organization_structure.deleted_at');
+            })
+            ->Join('employee_type', function ($join) {
+                $join->on('employees.employee_type', '=', 'employee_type.id')
+                    ->whereNull('employee_type.deleted_at');
+            })
+            ->select('users.*', 'employees.birth_date', 'employees.gender', 'employees.company', 'employees.join_date', 'position.name as positions', 'organization_structure.name as organizations', 'employee_type.name as employee_types')
+            ->get(); 
+
+        for ($i=0; $i < count($users); $i++) { 
+
+            $join_date = Carbon::create($users[$i]->join_date);
+
+            $users[$i]->join_date = $join_date->toDayDateTimeString();
+        }
+
         $userList = DB::table('users')->get();
         $permission_lists = DB::table('permission_lists')->get();
         $jobLevel = JobLevel::get();
