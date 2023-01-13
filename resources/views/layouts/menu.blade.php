@@ -10,7 +10,7 @@
                             <li><a class="{{ Session::Get('MENU') == 'emdashboard' ? 'active' : '' }}" href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
-                    @if (Auth::user()->role_name=='Super Admin')
+                    @if (Auth::user()->role_name=='2')
                         <li class="submenu"> <a href="#"><i class="fa fa-building"></i> <span> Organization Information</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a class="{{ Session::Get('MENU') == 'company' ? 'active' : '' }}" href="{{ route('Org.company') }}">Company Setting</a></li>
@@ -26,14 +26,28 @@
                             </ul>
                         </li>
                     @endif
-                    <li class="submenu"> <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Personal Information</span> <span class="menu-arrow"></span></a>
+                    <!-- class="noti-dot" -->
+                    <li class="submenu"> <a href="#"><i class="fa fa-plane"></i> <span> Leave Administration</span> <span class="menu-arrow"></span></a>
+                        <ul style="display: none;">
+                            <li><a  class="{{ Session::Get('MENU') == 'leaveTypeSetting' ? 'active' : '' }}" href="">Leave Type Setting</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'massLeavePeriod' ? 'active' : '' }}" href="">Mass Leave Period</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'generateELB' ? 'active' : '' }}" href="">Generate ELB</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'EmployeeLeaveBalance(ELB)' ? 'active' : '' }}" href="">Employee Leave Balance(ELB)</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'employeeMassLeave' ? 'active' : '' }}" href="">Employee Mass Leave</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'leaveRequest' ? 'active' : '' }}" href="">Leave Request</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'leaveRequestHRSS' ? 'active' : '' }}" href="">Leave Request HRSS</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'cashOutLeaveCalculation' ? 'active' : '' }}" href="">CashOut Leave Calculation</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'report' ? 'active' : '' }}" href="">Report</a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu"> <a href="#"><i class="la la-user"></i> <span> Personal Information</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li>
                                 <a class="{{ Session::Get('MENU') == 'allEmployees' ? 'active' : '' }}" href="{{ route('all/employee/list') }}">All Employees</a>
                             </li>
                         </ul>
                     </li>
-                    @if (Auth::user()->role_name=='Admin' || Auth::user()->role_name=='Super Admin')
+                    @if (Auth::user()->role_name=='1' || Auth::user()->role_name=='2')
                         <li class="menu-title"> <span>Authentication</span> </li>
                         <li class="submenu">
                             <a href="#">
@@ -47,7 +61,7 @@
                         </li>
                     @endif
                     <li class="menu-title"> <span>Employees</span> </li>
-                    <li class="submenu"> <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
+                    <li class="submenu"> <a href="#"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li>
                                 <a href="{{ route('all/employee/list') }}">All Employees</a>

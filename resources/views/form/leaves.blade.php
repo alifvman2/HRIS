@@ -1,8 +1,8 @@
-
-@extends('layouts.master')
+@extends('layouts.main')
+@section('title', 'Leaves Admin')
 @section('content')
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
+    <!-- <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
@@ -20,7 +20,7 @@
                             <li><a href="{{ route('em/dashboard') }}">Employee Dashboard</a></li>
                         </ul>
                     </li>
-                    @if (Auth::user()->role_name=='Admin')
+                    @if (Auth::user()->role_name=='1')
                         <li class="menu-title"> <span>Authentication</span> </li>
                         <li class="submenu">
                             <a href="#">
@@ -143,7 +143,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- /Sidebar -->
 
     <!-- Page Wrapper -->

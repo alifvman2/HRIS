@@ -14,10 +14,15 @@ class LeavesController extends Controller
     public function leaves()
     {
         $leaves = DB::table('leaves_admins')
-                    ->join('users', 'users.rec_id', '=', 'leaves_admins.rec_id')
+                    ->Join('users', function ($join) {
+                        $join->on('leaves_admins.users', '=', 'users.id')
+                            ->where('users.role_name', '1')
+                            ->whereNull('users.deleted_at');
+                    })
                     ->select('leaves_admins.*', 'users.position','users.name','users.avatar')
                     ->get();
 
+        Session::put('MENU', 'leavesAdmin');
         return view('form.leaves',compact('leaves'));
     }
     // save record
