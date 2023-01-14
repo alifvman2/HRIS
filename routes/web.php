@@ -281,3 +281,27 @@ Route::group(['prefix' => 'Organization', 'as' => 'Org.', 'middleware' => ['auth
     // WORK LOCATION END
 
 });
+
+Route::group(['prefix' => 'LeaveAdministration', 'as' => 'Leave.', 'middleware' => ['auth']], function () {
+
+    // LEAVE TYPE SETTING START
+    Route::get('/leaveTypeSetting','LeaveAdministration\LeaveTypeSettingController@index')->name('leaveTypeSetting');
+    Route::get('/leaveTypeSetting/create','LeaveAdministration\LeaveTypeSettingController@create');
+    Route::post('/leaveTypeSetting','LeaveAdministration\LeaveTypeSettingController@store');
+    Route::get('/leaveTypeSetting/{id}','LeaveAdministration\LeaveTypeSettingController@show');
+    Route::get('/leaveTypeSetting/{id}/edit','LeaveAdministration\LeaveTypeSettingController@edit');
+    Route::put('/leaveTypeSetting/{id}','LeaveAdministration\LeaveTypeSettingController@update');
+    Route::delete('/leaveTypeSetting/{id}','LeaveAdministration\LeaveTypeSettingController@destroy');
+    // LEAVE TYPE SETTING END
+
+    // MASS LEAVE PERIOD START
+    Route::get('/massLeavePeriod','LeaveAdministration\MassLeavePeriodController@index')->name('massLeavePeriod');
+    Route::get('/massLeavePeriod/create','LeaveAdministration\MassLeavePeriodController@create');
+    Route::post('/massLeavePeriod','LeaveAdministration\MassLeavePeriodController@store');
+    Route::get('/massLeavePeriod/{id}','LeaveAdministration\MassLeavePeriodController@show');
+    Route::get('/massLeavePeriod/{id}/edit','LeaveAdministration\MassLeavePeriodController@edit');
+    Route::put('/massLeavePeriod/{id}','LeaveAdministration\MassLeavePeriodController@update');
+    Route::delete('/massLeavePeriod/{id}','LeaveAdministration\MassLeavePeriodController@destroy');
+    // MASS LEAVE PERIOD END
+
+});

@@ -22,7 +22,7 @@ use Illuminate\Auth\Authenticatable as AuthenticableTrait;
  * @property string $join_date
  * @property string|null $phone_number
  * @property string|null $status
- * @property string|null $role_name
+ * @property int|null $role_name
  * @property string|null $avatar
  * @property string|null $position
  * @property string|null $department
@@ -44,8 +44,9 @@ class User extends \Eloquent implements Authenticatable
     use AuthenticableTrait;
 	use SoftDeletes;
 	protected $table = 'users';
-
+	
 	protected $casts = [
+		'role_name' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int',
 		'deleted_by' => 'int'
