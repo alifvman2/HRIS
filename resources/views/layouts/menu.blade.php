@@ -31,12 +31,12 @@
                         <ul style="display: none;">
                             <li><a  class="{{ Session::Get('MENU') == 'leaveTypeSetting' ? 'active' : '' }}" href="{{ route('Leave.leaveTypeSetting') }}">Leave Type Setting</a></li>
                             <li><a  class="{{ Session::Get('MENU') == 'massLeavePeriod' ? 'active' : '' }}" href="{{ route('Leave.massLeavePeriod') }}">Mass Leave Period</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'generateELB' ? 'active' : '' }}" href="">Generate ELB</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'EmployeeLeaveBalance(ELB)' ? 'active' : '' }}" href="">Employee Leave Balance(ELB)</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'employeeMassLeave' ? 'active' : '' }}" href="">Employee Mass Leave</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'leaveRequest' ? 'active' : '' }}" href="">Leave Request</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'leaveRequestHRSS' ? 'active' : '' }}" href="">Leave Request HRSS</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'cashOutLeaveCalculation' ? 'active' : '' }}" href="">CashOut Leave Calculation</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'generateELB' ? 'active' : '' }}" href="{{ route('Leave.generateELB') }}">Generate ELB</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'employeeLeaveBalance' ? 'active' : '' }}" href="{{ route('Leave.employeeLeaveBalance') }}">Employee Leave Balance(ELB)</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'employeeMassLeave' ? 'active' : '' }}" href="{{ route('Leave.employeeMassLeave') }}">Employee Mass Leave</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'leaveRequest' ? 'active' : '' }}" href="{{ route('Leave.leaveRequest') }}">Leave Request</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'leaveRequestHRSS' ? 'active' : '' }}" href="{{ route('Leave.leaveRequestHRSS') }}">Leave Request HRSS</a></li>
+                            <li><a  class="{{ Session::Get('MENU') == 'cashOutLeaveCalculation' ? 'active' : '' }}" href="{{ route('Leave.cashOutLeaveCalculation') }}">CashOut Leave Calculation</a></li>
                             <li><a  class="{{ Session::Get('MENU') == 'report' ? 'active' : '' }}" href="">Report</a></li>
                         </ul>
                     </li>

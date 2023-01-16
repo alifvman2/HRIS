@@ -304,4 +304,64 @@ Route::group(['prefix' => 'LeaveAdministration', 'as' => 'Leave.', 'middleware' 
     Route::delete('/massLeavePeriod/{id}','LeaveAdministration\MassLeavePeriodController@destroy');
     // MASS LEAVE PERIOD END
 
+    // GENERATE ELB START
+    Route::get('/generateELB','LeaveAdministration\GenerateELBController@index')->name('generateELB');
+    Route::get('/generateELB/create','LeaveAdministration\GenerateELBController@create');
+    Route::post('/generateELB','LeaveAdministration\GenerateELBController@store');
+    Route::get('/generateELB/{id}','LeaveAdministration\GenerateELBController@show');
+    Route::get('/generateELB/{id}/edit','LeaveAdministration\GenerateELBController@edit');
+    Route::put('/generateELB/{id}','LeaveAdministration\GenerateELBController@update');
+    Route::delete('/generateELB/{id}','LeaveAdministration\GenerateELBController@destroy');
+    // GENERATE ELB END
+
+    // EMPLOYEE LEAVE BALANCE START
+    Route::get('/employeeLeaveBalance','LeaveAdministration\EmployeeLeaveBalanceController@index')->name('employeeLeaveBalance');
+    Route::get('/employeeLeaveBalance/create','LeaveAdministration\EmployeeLeaveBalanceController@create');
+    Route::post('/employeeLeaveBalance','LeaveAdministration\EmployeeLeaveBalanceController@store');
+    Route::get('/employeeLeaveBalance/{id}','LeaveAdministration\EmployeeLeaveBalanceController@show');
+    Route::get('/employeeLeaveBalance/{id}/edit','LeaveAdministration\EmployeeLeaveBalanceController@edit');
+    Route::put('/employeeLeaveBalance/{id}','LeaveAdministration\EmployeeLeaveBalanceController@update');
+    Route::delete('/employeeLeaveBalance/{id}','LeaveAdministration\EmployeeLeaveBalanceController@destroy');
+    // EMPLOYEE LEAVE BALANCE END
+
+    // EMPLOYEE MASS LEAVE START
+    Route::get('/employeeMassLeave','LeaveAdministration\EmployeeMassLeaveController@index')->name('employeeMassLeave');
+    Route::get('/employeeMassLeave/create','LeaveAdministration\EmployeeMassLeaveController@create');
+    Route::post('/employeeMassLeave','LeaveAdministration\EmployeeMassLeaveController@store');
+    Route::get('/employeeMassLeave/{id}','LeaveAdministration\EmployeeMassLeaveController@show');
+    Route::get('/employeeMassLeave/{id}/edit','LeaveAdministration\EmployeeMassLeaveController@edit');
+    Route::put('/employeeMassLeave/{id}','LeaveAdministration\EmployeeMassLeaveController@update');
+    Route::delete('/employeeMassLeave/{id}','LeaveAdministration\EmployeeMassLeaveController@destroy');
+    // EMPLOYEE MASS LEAVE END
+
+    // LEAVE REQUEST START
+    Route::get('/leaveRequest','LeaveAdministration\LeaveRequestController@index')->name('leaveRequest');
+    Route::get('/leaveRequest/create','LeaveAdministration\LeaveRequestController@create');
+    Route::post('/leaveRequest','LeaveAdministration\LeaveRequestController@store');
+    Route::get('/leaveRequest/{id}','LeaveAdministration\LeaveRequestController@show');
+    Route::get('/leaveRequest/{id}/edit','LeaveAdministration\LeaveRequestController@edit');
+    Route::put('/leaveRequest/{id}','LeaveAdministration\LeaveRequestController@update');
+    Route::delete('/leaveRequest/{id}','LeaveAdministration\LeaveRequestController@destroy');
+    // LEAVE REQUEST END
+
+    // LEAVE REQUEST HRSS START
+    Route::get('/leaveRequestHRSS','LeaveAdministration\LeaveRequestHRSSController@index')->name('leaveRequestHRSS');
+    Route::get('/leaveRequestHRSS/create','LeaveAdministration\LeaveRequestHRSSController@create');
+    Route::post('/leaveRequestHRSS','LeaveAdministration\LeaveRequestHRSSController@store');
+    Route::get('/leaveRequestHRSS/{id}','LeaveAdministration\LeaveRequestHRSSController@show');
+    Route::get('/leaveRequestHRSS/{id}/edit','LeaveAdministration\LeaveRequestHRSSController@edit');
+    Route::put('/leaveRequestHRSS/{id}','LeaveAdministration\LeaveRequestHRSSController@update');
+    Route::delete('/leaveRequestHRSS/{id}','LeaveAdministration\LeaveRequestHRSSController@destroy');
+    // LEAVE REQUEST HRSS END
+
+    // CASHOUT LEAVE CALCULATION START
+    Route::get('/cashOutLeaveCalculation','LeaveAdministration\CashOutLeaveCalculationController@index')->name('cashOutLeaveCalculation');
+    Route::get('/cashOutLeaveCalculation/create','LeaveAdministration\CashOutLeaveCalculationController@create');
+    Route::post('/cashOutLeaveCalculation','LeaveAdministration\CashOutLeaveCalculationController@store');
+    Route::get('/cashOutLeaveCalculation/{id}','LeaveAdministration\CashOutLeaveCalculationController@show');
+    Route::get('/cashOutLeaveCalculation/{id}/edit','LeaveAdministration\CashOutLeaveCalculationController@edit');
+    Route::put('/cashOutLeaveCalculation/{id}','LeaveAdministration\CashOutLeaveCalculationController@update');
+    Route::delete('/cashOutLeaveCalculation/{id}','LeaveAdministration\CashOutLeaveCalculationController@destroy');
+    // CASHOUT LEAVE CALCULATION END
+
 });
