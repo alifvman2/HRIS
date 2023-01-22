@@ -287,7 +287,7 @@ Route::group(['prefix' => 'LeaveAdministration', 'as' => 'Leave.', 'middleware' 
     // LEAVE TYPE SETTING START
     Route::get('/leaveTypeSetting','LeaveAdministration\LeaveTypeSettingController@index')->name('leaveTypeSetting');
     Route::get('/leaveTypeSetting/create','LeaveAdministration\LeaveTypeSettingController@create');
-    Route::post('/leaveTypeSetting','LeaveAdministration\LeaveTypeSettingController@store');
+    Route::post('/leaveTypeSetting','LeaveAdministration\LeaveTypeSettingController@store')->name('store_leaveTypeSetting');
     Route::get('/leaveTypeSetting/{id}','LeaveAdministration\LeaveTypeSettingController@show');
     Route::get('/leaveTypeSetting/{id}/edit','LeaveAdministration\LeaveTypeSettingController@edit');
     Route::put('/leaveTypeSetting/{id}','LeaveAdministration\LeaveTypeSettingController@update');
