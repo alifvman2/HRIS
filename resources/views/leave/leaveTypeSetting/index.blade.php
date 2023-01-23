@@ -10,6 +10,10 @@
             font-size: 15px;
             height: 36px;
         }
+
+        .ui-datepicker-year{
+            display:none;
+        }
     </style>
 
     <!-- Page Wrapper -->
@@ -193,11 +197,25 @@
                             <div class="form-group row">
                                 <label for="repeat_interval" class="col-sm-4 col-form-label">Repeat Interval</label>
                                 <div class="col-sm-8">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Yes" name="repeat_interval" id="repeat_interval">
-                                        <label class="form-check-label" for="repeat_interval">
-                                        Yes
-                                        </label>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-6 form-check">
+                                                <input class="form-check-input" type="checkbox" value="Yes" name="repeat_interval" id="repeat_interval">
+                                                <label class="form-check-label" for="repeat_interval">
+                                                Yes
+                                                </label>
+                                            </div>
+                                            <div class="col-6" id="repeat_month" style="display: none;">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input class="form-control" type="number" id="repeat_month" name="repeat_month">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="form-group-label" for="repeat_month">Month(s)<label class="text-danger">*</label></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -209,7 +227,12 @@
                                             <option value="Join Date">Join Date</option>
                                             <option value="Spesific Date">Spesific Date</option>
                                             <option value="Permanent">Permanent</option>
+                                            <option value="Join Date And Sequently On Spesific Date">Join Date And Sequently On Spesific Date</option>
+                                            <option value="Permanent And Sequently On Spesific Date">Permanent And Sequently On Spesific Date</option>
                                         </select>
+                                    </div>
+                                    <div id="spesific_date" style="display: none;">
+                                        <input type='date' id='spesific_date' name="spesific_date" />
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +244,12 @@
                                             <input class="form-control" type="number" id="eligible_after" name="eligible_after">
                                         </div>
                                         <div class="col-6">
-                                            <label class="form-group-label" for="eligible_after">Month(s) After Join Date <label class="text-danger">*</label></label>
+                                            <label class="form-group-label" for="eligible_after">
+                                                Month(s) After 
+                                                <label id="join_date">Join Date</label>
+                                                <label id="permanent" style="display: none;">Permanent</label>
+                                                <label class="text-danger">*</label>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -449,6 +477,60 @@
 
     </div>
 
-	
+
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+
+	<script type="text/javascript">
+     
+        var checkbox = document.getElementById('repeat_interval');
+        var delivery_div = document.getElementById('repeat_month');
+        checkbox.onclick = function() {
+           if(this.checked) {
+             delivery_div.style['display'] = 'block';
+           } else {
+             delivery_div.style['display'] = 'none';
+           }
+        };
+
+        $('#leave_period_based_on').on('change',function(){
+            if( $(this).val()==="Join Date"){
+                $("#join_date").show()
+            }
+            else{
+                $("#join_date").hide()
+            }
+            if( $(this).val()==="Spesific Date"){
+                $("#spesific_date").show()
+            }
+            else{
+                $("#spesific_date").hide()
+            }
+            if( $(this).val()==="Permanent"){
+                $("#permanent").show()
+            }
+            else{
+                $("#permanent").hide()
+            }
+            if( $(this).val()==="Join Date And Sequently On Spesific Date"){
+                $("#join_date_and_sequently_on_spesific_date").show()
+            }
+            else{
+                $("#join_date_and_sequently_on_spesific_date").hide()
+            }
+            if( $(this).val()==="Permanent And Sequently On Spesific Date"){
+                $("#permanent_and_sequently_on_spesific_date").show()
+            }
+            else{
+                $("#permanent_and_sequently_on_spesific_date").hide()
+            }
+        });
+
+
+        $('.date').datepicker({  
+            format: 'mm-dd'
+        });  
+        
+    </script>
 
 @endsection
