@@ -123,7 +123,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('Leave.store_leaveTypeSetting') }}" method="POST">
+                        <form action="{{ route('Leave.store_leaveTypeSetting') }}" method="POST" enctype="multipart/form-data">
                             <p>General</p>
                             <hr>
                             @csrf
@@ -142,14 +142,14 @@
                             <div class="form-group row">
                                 <label for="initial_balance" class="col-sm-4 col-form-label">Initial Balance</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="number" id="initial_balance" name="initial_balance">
+                                    <input class="form-control" type="number" id="initial_balance" name="initial_balance" value="0">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="deducted_leave" class="col-sm-4 col-form-label">Deducted Leave</label>
                                 <div class="col-sm-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Yes" name="deducted_leave" id="deducted_leave">
+                                        <input class="form-check-input" type="checkbox" value="Yes" name="deducted_leave" id="deducted_leave" checked>
                                         <label class="form-check-label" for="deducted_leave">
                                         Yes
                                         </label>
@@ -160,7 +160,7 @@
                                 <label for="day_count" class="col-sm-4 col-form-label">Day Count</label>
                                 <div class="col-sm-8">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="day_count" id="day_count1" value="Work Day">
+                                        <input class="form-check-input" type="radio" name="day_count" id="day_count1" value="Work Day" checked>
                                         <label class="form-check-label" for="day_count1">Work Day</label>
                                     </div>
                                     <div class="form-check form-check-inline">
@@ -194,24 +194,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="repeat_interval" class="col-sm-4 col-form-label">Repeat Interval</label>
-                                <div class="col-sm-8">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-6 form-check">
-                                                <input class="form-check-input" type="checkbox" value="Yes" name="repeat_interval" id="repeat_interval">
-                                                <label class="form-check-label" for="repeat_interval">
-                                                Yes
-                                                </label>
-                                            </div>
-                                            <div class="col-6" id="repeat_month" style="display: none;">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <input class="form-control" type="number" id="repeat_month" name="repeat_month">
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <label class="form-group-label" for="repeat_month">Month(s)<label class="text-danger">*</label></label>
+                            <div class="form-group" id="repeat_interval1">
+                                <div class="row">
+                                    <label for="repeat_interval" class="col-sm-4 col-form-label">Repeat Interval</label>
+                                    <div class="col-sm-8">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-6 form-check">
+                                                    <input class="form-check-input" type="checkbox" value="Yes" name="repeat_interval" id="repeat_interval">
+                                                    <label class="form-check-label" for="repeat_interval">
+                                                    Yes
+                                                    </label>
+                                                </div>
+                                                <div class="col-6" id="repeat_month" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <input class="form-control" type="number" id="repeat_month" name="repeat_month">
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label class="form-group-label" for="repeat_month">Month(s)<label class="text-danger">*</label></label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -227,12 +229,40 @@
                                             <option value="Join Date">Join Date</option>
                                             <option value="Spesific Date">Spesific Date</option>
                                             <option value="Permanent">Permanent</option>
-                                            <option value="Join Date And Sequently On Spesific Date">Join Date And Sequently On Spesific Date</option>
-                                            <option value="Permanent And Sequently On Spesific Date">Permanent And Sequently On Spesific Date</option>
+                                            <option id="valval" value="Join Date And Sequently On Spesific Date" style="display: none;">Join Date And Sequently On Spesific Date</option>
+                                            <option id="valval2" value="Permanent Date And Sequently On Spesific Date" style="display: none;">Permanent Date And Sequently On Spesific Date</option>
                                         </select>
                                     </div>
                                     <div id="spesific_date" style="display: none;">
-                                        <input type='date' id='spesific_date' name="spesific_date" />
+                                        <input type='text' name="spesific_date" class="form-control date" />
+                                    </div>
+                                    <div id="spesific_date2" style="display: none;">
+                                        <input type='text' name="spesific_date" class="form-control date" />
+                                    </div>
+                                    <div id="spesific_date3" style="display: none;">
+                                        <input type='text' name="spesific_date" class="form-control date" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="proportional_after" style="display: none;">
+                                <label for="proportional_after" class="col-sm-4 col-form-label">Proportional After</label>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <select class="form-control" name="proportional_after" id="proportional_after">
+                                            <option value="First Year">First Year</option>
+                                            <option value="Second Year">Second Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="proportional_after2" style="display: none;">
+                                <label for="proportional_after" class="col-sm-4 col-form-label">Proportional After</label>
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <select class="form-control" name="proportional_after" id="proportional_after">
+                                            <option value="First Year">First Year</option>
+                                            <option value="Second Year">Second Year</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -245,23 +275,36 @@
                                         </div>
                                         <div class="col-6">
                                             <label class="form-group-label" for="eligible_after">
-                                                Month(s) After 
-                                                <label id="join_date">Join Date</label>
-                                                <label id="permanent" style="display: none;">Permanent</label>
+                                                Month(s) After Join Date
                                                 <label class="text-danger">*</label>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="use_max_join_date_for_entitlement_leave" class="col-sm-4 col-form-label">Use Max Join Date For Entitlement Leave</label>
+                            <div class="form-group row" id="use_max_join_date_for_entitlement_leave">
+                                <label for="use_max_join_date_for_entitlement_leave" class="col-sm-4 col-form-label">
+                                    Use Max 
+                                    <label id="join_date">Join Date</label>
+                                    <label id="permanent" style="display: none;">Permanent Date</label>
+                                    <label id="join_date2">Join Date</label>
+                                    <label id="permanent2" style="display: none;">Permanent Date</label>
+                                    For Entitlement Leave
+                                </label>
                                 <div class="col-sm-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Yes" name="use_max_join_date_for_entitlement_leave" id="use_max_join_date_for_entitlement_leave">
+                                        <input class="form-check-input" type="checkbox" value="Yes" name="use_max_join_date_for_entitlement_leave" id="use_max_join_date_for_entitlement_leave1">
                                         <label class="form-check-label" for="use_max_join_date_for_entitlement_leave">
                                         Yes
                                         </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="maximum_join_date" style="display: none;">
+                                <div class="form-group row">
+                                    <label for="maximum_join_date" class="col-sm-4 col-form-label">Maximum Join Date</label>
+                                    <div class="col-sm-8">
+                                        <input type='text' name="maximum_join_date" class="form-control maximum_join_date" />
                                     </div>
                                 </div>
                             </div>
@@ -269,23 +312,61 @@
                                 <label for="generate_method" class="col-sm-4 col-form-label">Generate Method</label>
                                 <div class="col-sm-8">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="generate_method" id="generate_method1" value="Full">
+                                        <input class="form-check-input" type="radio" name="generate_method" id="generate_method1" value="Full" checked>
                                         <label class="form-check-label" for="generate_method1">Full</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="generate_method" id="generate_method2" value="Increment">
                                         <label class="form-check-label" for="generate_method2">Increment</label>
                                     </div>
+                                    <div id="increment" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input class="form-control" type="number" name="increment_every" id="increment_every">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label for="increment_every">Every</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <input class="form-control" type="number" name="increment_month" id="increment_month">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label for="increment_month">Month(s)</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="generate_at" class="col-sm-4 col-form-label">Generate At</label>
                                 <div class="col-sm-8">
-                                    <div class="form-group">
-                                        <select class="form-control" name="generate_at" id="generate_at">
-                                            <option value="End Of Month">End Of Month</option>
-                                            <option value="Spesific Date">Spesific Date</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <select class="form-control" name="generate_at" id="generate_at">
+                                                <option value="End Of Month">End Of Month</option>
+                                                <option value="Spesific Date">Spesific Date</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <div id="spesific_date_generate_at" style="display: none;">
+                                                <div class="form-group row">
+                                                    <div class="col-6">
+                                                        <label for="spesific_date_generate_at">Date</label>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <input type='text' name="spesific_date_generate_at" class="form-control spesific_date_generate_at" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -297,21 +378,37 @@
                                         <label class="form-check-label" for="leave_valid_until1">Month</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="leave_valid_until" id="leave_valid_until1" value="Remaining Leave">
-                                        <label class="form-check-label" for="leave_valid_until1">Remaining Leave</label>
+                                        <input class="form-check-input" type="radio" name="leave_valid_until" id="leave_valid_until2" value="Remaining Leave">
+                                        <label class="form-check-label" for="leave_valid_until2">Remaining Leave</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="leave_valid_until" id="leave_valid_until3" value="Spesific Date">
                                         <label class="form-check-label" for="leave_valid_until3">Spesific Date</label>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <input class="form-control" type="number" id="leave_valid_month" name="leave_valid_month">
-                                        </div>
-                                        <div class="col-6">
-                                            <label class="form-group-label" for="leave_valid_month">Month(s) <label class="text-danger">*</label></label>
+                                    <div id="leave_valid_month">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input class="form-control" type="number" id="leave_valid_month" name="leave_valid_month">
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="form-group-label" for="leave_valid_month">Month(s) <label class="text-danger">*</label></label>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div id="leave_valid_remain" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input class="form-control" type="number" id="leave_valid_remain" name="leave_valid_remain">
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="form-group-label" for="leave_valid_remain">Remain(s) <label class="text-danger">*</label></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="leave_valid_spesific_date" style="display: none;">
+                                        <input type='text' name="leave_valid_spesific_date" class="form-control leave_valid_spesific_date" />
+                                    </div>
+
                                 </div>
                             </div>
                             <hr>
@@ -337,6 +434,24 @@
                                         Yes
                                         </label>
                                     </div>
+                                    <div id="avoid_taken_in_row_div" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-8 row">
+                                                <div class="col-4">
+                                                    <input class="form-control" type="number" id="avoid_taken_in_row_days" name="avoid_taken_in_row_days">
+                                                </div>
+                                                <div class="col-8">
+                                                    <label class="form-group-label" for="avoid_taken_in_row_days">Days in Row in One Period</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 form-check">
+                                                <input class="form-check-input" type="checkbox" value="Ignore Off Day" name="avoid_taken_in_row_ignore" id="avoid_taken_in_row_ignore">
+                                                <label class="form-check-label" for="avoid_taken_in_row_ignore">
+                                                Ignore Off Day
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -347,6 +462,35 @@
                                         <label class="form-check-label" for="maximum_taken">
                                         Yes
                                         </label>
+                                    </div>
+                                    <div id="maximum_taken_div" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-6 row">
+                                                <div class="col-6">
+                                                    <input class="form-control" type="number" id="maximum_taken_day" name="maximum_taken_day">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="form-group-label" for="maximum_taken_day">Day(s)</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 form-group">
+                                                <select class="form-control" name="maximum_taken_select" id="maximum_taken_select">
+                                                    <option value="In Same Year">In Same Year</option>
+                                                    <option value="In Same Month">In Same Month</option>
+                                                    <option value="Based On Same Period">Based On Same Period</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="based_on_same_period_month" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <input class="form-control" type="number" id="based_on_same_period_month" name="based_on_same_period_month">
+                                            </div>
+                                            <div class="col-8">
+                                                <label class="form-group-label" for="based_on_same_period_month">Month(s) From Start Period</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -376,6 +520,56 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="carry_forward_method" style="display: none;">
+                                <div class="form-group row">
+                                    <label for="carry_forward_method" class="col-sm-4 col-form-label">Carry Forward Method</label>
+                                    <div class="col-sm-8">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="carry_forward_method" id="carry_forward_method1" value="Remaining Balance" checked>
+                                            <label class="form-check-label" for="carry_forward_method1">Remaining Balance</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="carry_forward_method" id="carry_forward_method2" value="Maximum">
+                                            <label class="form-check-label" for="carry_forward_method2">Maximum</label>
+                                        </div>
+                                        <div id="days_maximum" style="display: none;">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input class="form-control" type="number" id="days_maximum" name="days_maximum">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="form-group-label" for="days_maximum">Day(s)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="cash_out_method" style="display: none;">
+                                <div class="form-group row">
+                                    <label for="cash_out_method" class="col-sm-4 col-form-label">Cash Out</label>
+                                    <div class="col-sm-8">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="cash_out_method" id="cash_out_method1" value="Remaining Balance" checked>
+                                            <label class="form-check-label" for="cash_out_method1">Remaining Balance</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="cash_out_method" id="cash_out_method2" value="Maximum">
+                                            <label class="form-check-label" for="cash_out_method2">Maximum</label>
+                                        </div>
+                                        <div id="days_maximum2" style="display: none;">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input class="form-control" type="number" id="days_maximum2" name="days_maximum2">
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="form-group-label" for="days_maximum2">Day(s)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label for="advance_leave_allowed" class="col-sm-4 col-form-label">Advance Leave Allowed</label>
                                 <div class="col-sm-8">
@@ -384,6 +578,16 @@
                                         <label class="form-check-label" for="advance_leave_allowed">
                                         Yes
                                         </label>
+                                    </div>
+                                    <div id="max_advance_leave" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <input class="form-control" type="number" id="max_advance_leave" name="max_advance_leave">
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="form-group-label" for="max_advance_leave">Day(s) (0 means no maximum minus)</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -477,19 +681,39 @@
 
     </div>
 
-
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
 	<script type="text/javascript">
      
         var checkbox = document.getElementById('repeat_interval');
         var delivery_div = document.getElementById('repeat_month');
+        var select_val = document.getElementById('valval');
+        var select_val2 = document.getElementById('valval2');
         checkbox.onclick = function() {
            if(this.checked) {
              delivery_div.style['display'] = 'block';
+             select_val.style['display'] = 'block';
+             select_val2.style['display'] = 'block';
            } else {
              delivery_div.style['display'] = 'none';
+             select_val.style['display'] = 'none';
+             select_val2.style['display'] = 'none';
+           }
+        };
+
+        var checkbox2 = document.getElementById('generate_method1');
+        var checkbox3 = document.getElementById('generate_method2');
+        var delivery_div2 = document.getElementById('increment');
+        checkbox2.onclick = function() {
+           if(this.checked) {
+             delivery_div2.style['display'] = 'none';
+           } else {
+             delivery_div2.style['display'] = 'block';
+           }
+        };
+        checkbox3.onclick = function() {
+           if(this.checked) {
+             delivery_div2.style['display'] = 'block';
+           } else {
+             delivery_div2.style['display'] = 'none';
            }
         };
 
@@ -501,10 +725,12 @@
                 $("#join_date").hide()
             }
             if( $(this).val()==="Spesific Date"){
-                $("#spesific_date").show()
+                $("#spesific_date").show();
+                $("#use_max_join_date_for_entitlement_leave").hide();
             }
             else{
-                $("#spesific_date").hide()
+                $("#spesific_date").hide();
+                $("#use_max_join_date_for_entitlement_leave").show();
             }
             if( $(this).val()==="Permanent"){
                 $("#permanent").show()
@@ -513,24 +739,179 @@
                 $("#permanent").hide()
             }
             if( $(this).val()==="Join Date And Sequently On Spesific Date"){
-                $("#join_date_and_sequently_on_spesific_date").show()
+                $("#join_date2").show()
+                $("#spesific_date2").show()
+                $("#proportional_after").show()
             }
             else{
-                $("#join_date_and_sequently_on_spesific_date").hide()
+                $("#join_date2").hide()
+                $("#spesific_date2").hide()
+                $("#proportional_after").hide()
             }
-            if( $(this).val()==="Permanent And Sequently On Spesific Date"){
-                $("#permanent_and_sequently_on_spesific_date").show()
+            if( $(this).val()==="Permanent Date And Sequently On Spesific Date"){
+                $("#permanent2").show()
+                $("#spesific_date3").show()
+                $("#proportional_after2").show()
             }
             else{
-                $("#permanent_and_sequently_on_spesific_date").hide()
+                $("#permanent2").hide()
+                $("#spesific_date3").hide()
+                $("#proportional_after2").hide()
             }
         });
 
+        $('#generate_at').on('change',function(){
+            if( $(this).val()==="Spesific Date"){
+                $("#spesific_date_generate_at").show()
+            }
+            else{
+                $("#spesific_date_generate_at").hide()
+            }
+        });
 
-        $('.date').datepicker({  
-            format: 'mm-dd'
-        });  
-        
+        $(function() {
+            $('.date').datetimepicker({  
+                format: 'DD-MM'
+            });  
+            $('.spesific_date_generate_at').datetimepicker({  
+                format: 'DD'
+            });  
+            $('.leave_valid_spesific_date').datetimepicker({  
+                format: 'DD-MM-YYYY'
+            });  
+            $('.maximum_join_date').datetimepicker({  
+                format: 'DD'
+            });  
+        });
+
+        var checkbox4 = document.getElementById('leave_valid_until1');
+        var checkbox5 = document.getElementById('leave_valid_until2');
+        var checkbox6 = document.getElementById('leave_valid_until3');
+        var delivery_div3 = document.getElementById('leave_valid_month');
+        var delivery_div4 = document.getElementById('leave_valid_remain');
+        var delivery_div5 = document.getElementById('leave_valid_spesific_date');
+        checkbox4.onclick = function() {
+           if(this.checked) {
+             delivery_div3.style['display'] = 'block';
+             delivery_div4.style['display'] = 'none';
+             delivery_div5.style['display'] = 'none';
+           } else {
+             delivery_div3.style['display'] = 'none';
+           }
+        };
+        checkbox5.onclick = function() {
+           if(this.checked) {
+             delivery_div3.style['display'] = 'none';
+             delivery_div4.style['display'] = 'block';
+             delivery_div5.style['display'] = 'none';
+           } else {
+             delivery_div4.style['display'] = 'none';
+           }
+        };
+        checkbox6.onclick = function() {
+           if(this.checked) {
+             delivery_div3.style['display'] = 'none';
+             delivery_div4.style['display'] = 'none';
+             delivery_div5.style['display'] = 'block';
+           } else {
+             delivery_div5.style['display'] = 'none';
+           }
+        };
+
+        var checkbox7 = document.getElementById('avoid_taken_in_row');
+        var delivery_div6 = document.getElementById('avoid_taken_in_row_div');
+        checkbox7.onclick = function() {
+           if(this.checked) {
+             delivery_div6.style['display'] = 'block';
+           } else {
+             delivery_div6.style['display'] = 'none';
+           }
+        };
+
+        var checkbox8 = document.getElementById('maximum_taken');
+        var delivery_div7 = document.getElementById('maximum_taken_div');
+        checkbox8.onclick = function() {
+           if(this.checked) {
+             delivery_div7.style['display'] = 'block';
+           } else {
+             delivery_div7.style['display'] = 'none';
+           }
+        };
+
+        $('#maximum_taken_select').on('change',function(){
+            if( $(this).val()==="Based On Same Period"){
+                $("#based_on_same_period_month").show()
+            }
+            else{
+                $("#based_on_same_period_month").hide()
+            }
+        });
+
+        $('#if_expired').on('change',function(){
+            if( $(this).val()==="Carry Forward"){
+                $("#carry_forward_method").show()
+            }
+            else{
+                $("#carry_forward_method").hide()
+            }
+            if( $(this).val()==="Cash Out"){
+                $("#cash_out_method").show()
+            }
+            else{
+                $("#cash_out_method").hide()
+            }
+        });
+
+        var checkbox9 = document.getElementById('carry_forward_method2');
+        var delivery_div8 = document.getElementById('days_maximum');
+        checkbox9.onclick = function() {
+           if(this.checked) {
+             delivery_div8.style['display'] = 'block';
+           } else {
+             delivery_div8.style['display'] = 'none';
+           }
+        };
+
+        var checkbox10 = document.getElementById('cash_out_method2');
+        var delivery_div9 = document.getElementById('days_maximum2');
+        checkbox10.onclick = function() {
+           if(this.checked) {
+             delivery_div9.style['display'] = 'block';
+           } else {
+             delivery_div9.style['display'] = 'none';
+           }
+        };
+
+        var checkbox11 = document.getElementById('advance_leave_allowed');
+        var delivery_div10 = document.getElementById('max_advance_leave');
+        checkbox11.onclick = function() {
+           if(this.checked) {
+             delivery_div10.style['display'] = 'block';
+           } else {
+             delivery_div10.style['display'] = 'none';
+           }
+        };
+
+        var checkbox12 = document.getElementById('deducted_leave');
+        var delivery_div11 = document.getElementById('repeat_interval1');
+        checkbox12.onclick = function() {
+           if(this.checked) {
+             delivery_div11.style['display'] = 'block';
+           } else {
+             delivery_div11.style['display'] = 'none';
+           }
+        };
+
+        var checkbox13 = document.getElementById('use_max_join_date_for_entitlement_leave1');
+        var delivery_div12 = document.getElementById('maximum_join_date');
+        checkbox13.onclick = function() {
+           if(this.checked) {
+             delivery_div12.style['display'] = 'block';
+           } else {
+             delivery_div12.style['display'] = 'none';
+           }
+        };
+
     </script>
 
 @endsection
