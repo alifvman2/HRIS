@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Session;
 use App\Models\LeaveTypeSetting;
 use DB;
+use App\Models\User;
+use Auth;
+use Brian2694\Toastr\Facades\Toastr;
 
 class LeaveTypeSettingController extends Controller
 {
@@ -44,7 +47,6 @@ class LeaveTypeSettingController extends Controller
     public function store(Request $request)
     {
 
-        return $request->all();
         $request->validate([
             'leave_code'        => 'required|string|max:255',
             'leave_name'        => 'required|string|max:255',
@@ -66,9 +68,9 @@ class LeaveTypeSettingController extends Controller
                 $leave->allowed_half_day                        = $request->allowed_half_day;
                 $leave->once_in_employment_period               = $request->once_in_employment_period;
                 $leave->repeat_interval                         = $request->repeat_interval;
-                $leave->repeat_month                            = $request->repeat_month;
+                $leave->repeat_interval_month                   = $request->repeat_month;
                 $leave->leave_period_based_on                   = $request->leave_period_based_on;
-                $leave->spesific_date                           = $request->spesific_date;
+                $leave->leave_period_based_on_spesific_date     = $request->spesific_date;
                 $leave->proportional_after                      = $request->proportional_after;
                 $leave->eligible_after                          = $request->eligible_after;
                 $leave->use_max_join_date_for_entitlement_leave = $request->use_max_join_date_for_entitlement_leave;
@@ -77,12 +79,12 @@ class LeaveTypeSettingController extends Controller
                 $leave->increment_every                         = $request->increment_every;
                 $leave->increment_month                         = $request->increment_month;
                 $leave->generate_at                             = $request->generate_at;
-                $leave->spesific_date_generate_at               = $request->spesific_date_generate_at;
+                $leave->generate_at_spesific_date               = $request->spesific_date_generate_at;
                 $leave->leave_valid_until                       = $request->leave_valid_until;
                 $leave->leave_valid_month                       = $request->leave_valid_month;
                 $leave->leave_valid_remain                      = $request->leave_valid_remain;
                 $leave->leave_valid_spesific_date               = $request->leave_valid_spesific_date;
-                $leave->avoid_sequential_day_with_Another_leave = $request->avoid_sequential_day_with_Another_leave;
+                $leave->avoid_sequential_day_with_another_leave = $request->avoid_sequential_day_with_another_leave;
                 $leave->avoid_taken_in_row                      = $request->avoid_taken_in_row;
                 $leave->avoid_taken_in_row_days                 = $request->avoid_taken_in_row_days;
                 $leave->avoid_taken_in_row_ignore               = $request->avoid_taken_in_row_ignore;
@@ -93,20 +95,26 @@ class LeaveTypeSettingController extends Controller
                 $leave->mandatory_attachment                    = $request->mandatory_attachment;
                 $leave->if_expired                              = $request->if_expired;
                 $leave->carry_forward_method                    = $request->carry_forward_method;
+                $leave->carry_forward_method_days_maximum       = $request->carry_forward_method_days_maximum;
                 $leave->cash_out_method                         = $request->cash_out_method;
-                $leave->days_maximum                            = $request->days_maximum;
-                $leave->days_maximum2                           = $request->days_maximum2;
+                $leave->cash_out_method_days_maximum            = $request->cash_out_method_days_maximum;
                 $leave->advance_leave_allowed                   = $request->advance_leave_allowed;
                 $leave->max_advance_leave                       = $request->max_advance_leave;
                 $leave->attendance_status                       = $request->attendance_status;
                 $leave->day_limit_submit_request                = $request->day_limit_submit_request;
                 $leave->other_attendances_status                = $request->other_attendances_status;
-                $employee->save();
+                $leave->created_by                              = auth::user()->id;
+                $leave->save();
+                
+                DB::commit();
+                Toastr::success('Add new Leave successfully :)','Success');
+                return redirect()->back();
 
             }else{
                 DB::rollback();
                 Toastr::error('Leave Code Already exits :)','Error');
                 return redirect()->back();
+                // return "else";
             }
         }catch(\Exception $e){
             DB::rollback();

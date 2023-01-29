@@ -173,7 +173,7 @@
                                 <label for="allowed_half_day" class="col-sm-4 col-form-label">Allowed Half Day</label>
                                 <div class="col-sm-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" name="allowed_half_day" id="allowed_half_day">
+                                        <input class="form-check-input" type="checkbox" value="Yes" name="allowed_half_day" id="allowed_half_day">
                                         <label class="form-check-label" for="allowed_half_day">
                                         Yes
                                         </label>
@@ -249,6 +249,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <select class="form-control" name="proportional_after" id="proportional_after">
+                                            <option value="" disabled selected>-- Select --</option>
                                             <option value="First Year">First Year</option>
                                             <option value="Second Year">Second Year</option>
                                         </select>
@@ -260,6 +261,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <select class="form-control" name="proportional_after" id="proportional_after">
+                                            <option value="" disabled selected>-- Select --</option>
                                             <option value="First Year">First Year</option>
                                             <option value="Second Year">Second Year</option>
                                         </select>
@@ -374,7 +376,7 @@
                                 <label for="leave_valid_until" class="col-sm-4 col-form-label">Leave Valid Until</label>
                                 <div class="col-sm-8">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="leave_valid_until" id="leave_valid_until1" value="Month">
+                                        <input class="form-check-input" type="radio" name="leave_valid_until" id="leave_valid_until1" value="Month" checked>
                                         <label class="form-check-label" for="leave_valid_until1">Month</label>
                                     </div>
                                     <div class="form-check form-check-inline">
@@ -415,11 +417,11 @@
                             <p>Validation</p>
                             <hr>
                             <div class="form-group row">
-                                <label for="avoid_sequential_day_with_Another_leave" class="col-sm-4 col-form-label">Avoid Sequential Day With Another Leave</label>
+                                <label for="avoid_sequential_day_with_another_leave" class="col-sm-4 col-form-label">Avoid Sequential Day With Another Leave</label>
                                 <div class="col-sm-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Yes" name="avoid_sequential_day_with_Another_leave" id="avoid_sequential_day_with_Another_leave">
-                                        <label class="form-check-label" for="avoid_sequential_day_with_Another_leave">
+                                        <input class="form-check-input" type="checkbox" value="Yes" name="avoid_sequential_day_with_another_leave" id="avoid_sequential_day_with_another_leave">
+                                        <label class="form-check-label" for="avoid_sequential_day_with_another_leave">
                                         Yes
                                         </label>
                                     </div>
@@ -475,6 +477,7 @@
                                             </div>
                                             <div class="col-6 form-group">
                                                 <select class="form-control" name="maximum_taken_select" id="maximum_taken_select">
+                                                    <option value="" selected disabled>-- Select --</option>
                                                     <option value="In Same Year">In Same Year</option>
                                                     <option value="In Same Month">In Same Month</option>
                                                     <option value="Based On Same Period">Based On Same Period</option>
@@ -525,20 +528,20 @@
                                     <label for="carry_forward_method" class="col-sm-4 col-form-label">Carry Forward Method</label>
                                     <div class="col-sm-8">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="carry_forward_method" id="carry_forward_method1" value="Remaining Balance" checked>
+                                            <input class="form-check-input" type="radio" name="carry_forward_method" id="carry_forward_method1" value="Remaining Balance">
                                             <label class="form-check-label" for="carry_forward_method1">Remaining Balance</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="carry_forward_method" id="carry_forward_method2" value="Maximum">
                                             <label class="form-check-label" for="carry_forward_method2">Maximum</label>
                                         </div>
-                                        <div id="days_maximum" style="display: none;">
+                                        <div id="carry_forward_method_days_maximum" style="display: none;">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <input class="form-control" type="number" id="days_maximum" name="days_maximum">
+                                                    <input class="form-control" type="number" id="carry_forward_method_days_maximum" name="carry_forward_method_days_maximum">
                                                 </div>
                                                 <div class="col-6">
-                                                    <label class="form-group-label" for="days_maximum">Day(s)</label>
+                                                    <label class="form-group-label" for="carry_forward_method_days_maximum">Day(s)</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -550,20 +553,20 @@
                                     <label for="cash_out_method" class="col-sm-4 col-form-label">Cash Out</label>
                                     <div class="col-sm-8">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="cash_out_method" id="cash_out_method1" value="Remaining Balance" checked>
+                                            <input class="form-check-input" type="radio" name="cash_out_method" id="cash_out_method1" value="Remaining Balance">
                                             <label class="form-check-label" for="cash_out_method1">Remaining Balance</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="cash_out_method" id="cash_out_method2" value="Maximum">
                                             <label class="form-check-label" for="cash_out_method2">Maximum</label>
                                         </div>
-                                        <div id="days_maximum2" style="display: none;">
+                                        <div id="cash_out_method_days_maximum" style="display: none;">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <input class="form-control" type="number" id="days_maximum2" name="days_maximum2">
+                                                    <input class="form-control" type="number" id="cash_out_method_days_maximum" name="cash_out_method_days_maximum">
                                                 </div>
                                                 <div class="col-6">
-                                                    <label class="form-group-label" for="days_maximum2">Day(s)</label>
+                                                    <label class="form-group-label" for="cash_out_method_days_maximum">Day(s)</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -863,7 +866,7 @@
         });
 
         var checkbox9 = document.getElementById('carry_forward_method2');
-        var delivery_div8 = document.getElementById('days_maximum');
+        var delivery_div8 = document.getElementById('carry_forward_method_days_maximum');
         checkbox9.onclick = function() {
            if(this.checked) {
              delivery_div8.style['display'] = 'block';
@@ -873,7 +876,7 @@
         };
 
         var checkbox10 = document.getElementById('cash_out_method2');
-        var delivery_div9 = document.getElementById('days_maximum2');
+        var delivery_div9 = document.getElementById('cash_out_method_days_maximum');
         checkbox10.onclick = function() {
            if(this.checked) {
              delivery_div9.style['display'] = 'block';
