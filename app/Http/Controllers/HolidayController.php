@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Models\Holiday;
 use DB;
+use Session;
 
 class HolidayController extends Controller
 {
@@ -13,6 +14,7 @@ class HolidayController extends Controller
     public function holiday()
     {
         $holiday = Holiday::all();
+        Session::put('MENU', 'holidays');
         return view('form.holidays',compact('holiday'));
     }
     // save record

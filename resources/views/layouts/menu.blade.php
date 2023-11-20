@@ -25,28 +25,35 @@
                                 <li><a  class="{{ Session::Get('MENU') == 'workLocation' ? 'active' : '' }}" href="{{ route('Org.workLocation') }}">Work Location</a></li>
                             </ul>
                         </li>
+                        <!-- class="noti-dot" -->
+                        <li class="submenu"> <a href="#"><i class="fa fa-plane"></i> <span> Leave Administration</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a  class="{{ Session::Get('MENU') == 'leaveTypeSetting' ? 'active' : '' }}" href="{{ route('Leave.leaveTypeSetting') }}">Leave Type Setting</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'massLeavePeriod' ? 'active' : '' }}" href="{{ route('Leave.massLeavePeriod') }}">Mass Leave Period</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'generateELB' ? 'active' : '' }}" href="{{ route('Leave.generateELB') }}">Generate ELB</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'employeeLeaveBalance' ? 'active' : '' }}" href="{{ route('Leave.employeeLeaveBalance') }}">Employee Leave Balance(ELB)</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'employeeMassLeave' ? 'active' : '' }}" href="{{ route('Leave.employeeMassLeave') }}">Employee Mass Leave</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'leaveRequest' ? 'active' : '' }}" href="{{ route('Leave.leaveRequest') }}">Leave Request</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'leaveRequestHRSS' ? 'active' : '' }}" href="{{ route('Leave.leaveRequestHRSS') }}">Leave Request HRSS</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'cashOutLeaveCalculation' ? 'active' : '' }}" href="{{ route('Leave.cashOutLeaveCalculation') }}">CashOut Leave Calculation</a></li>
+                                <li><a  class="{{ Session::Get('MENU') == 'report' ? 'active' : '' }}" href="">Report</a></li>
+                            </ul>
+                        </li>
+                    @else
+                        <!-- class="noti-dot" -->
+                        <li class="submenu"> <a href="#"><i class="fa fa-plane"></i> <span> Leave Administration</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a  class="{{ Session::Get('MENU') == 'leaveRequestHRSS' ? 'active' : '' }}" href="{{ route('Leave.leaveRequestHRSS') }}">Leave Request HRSS</a></li>
+                            </ul>
+                        </li>
                     @endif
-                    <!-- class="noti-dot" -->
-                    <li class="submenu"> <a href="#"><i class="fa fa-plane"></i> <span> Leave Administration</span> <span class="menu-arrow"></span></a>
-                        <ul style="display: none;">
-                            <li><a  class="{{ Session::Get('MENU') == 'leaveTypeSetting' ? 'active' : '' }}" href="{{ route('Leave.leaveTypeSetting') }}">Leave Type Setting</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'massLeavePeriod' ? 'active' : '' }}" href="{{ route('Leave.massLeavePeriod') }}">Mass Leave Period</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'generateELB' ? 'active' : '' }}" href="{{ route('Leave.generateELB') }}">Generate ELB</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'employeeLeaveBalance' ? 'active' : '' }}" href="{{ route('Leave.employeeLeaveBalance') }}">Employee Leave Balance(ELB)</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'employeeMassLeave' ? 'active' : '' }}" href="{{ route('Leave.employeeMassLeave') }}">Employee Mass Leave</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'leaveRequest' ? 'active' : '' }}" href="{{ route('Leave.leaveRequest') }}">Leave Request</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'leaveRequestHRSS' ? 'active' : '' }}" href="{{ route('Leave.leaveRequestHRSS') }}">Leave Request HRSS</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'cashOutLeaveCalculation' ? 'active' : '' }}" href="{{ route('Leave.cashOutLeaveCalculation') }}">CashOut Leave Calculation</a></li>
-                            <li><a  class="{{ Session::Get('MENU') == 'report' ? 'active' : '' }}" href="">Report</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu"> <a href="#"><i class="la la-user"></i> <span> Personal Information</span> <span class="menu-arrow"></span></a>
+                    <!-- <li class="submenu"> <a href="#"><i class="la la-user"></i> <span> Personal Information</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li>
                                 <a class="{{ Session::Get('MENU') == 'allEmployees' ? 'active' : '' }}" href="{{ route('all/employee/list') }}">All Employees</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                     @if (Auth::user()->role_name=='1' || Auth::user()->role_name=='2')
                         <li class="menu-title"> <span>Authentication</span> </li>
                         <li class="submenu">
@@ -64,22 +71,24 @@
                     <li class="submenu"> <a href="#"><i class="la la-user"></i> <span> Employees</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li>
-                                <a href="{{ route('all/employee/list') }}">All Employees</a>
+                                <a class="{{ Session::Get('MENU') == 'allEmployees' ? 'active' : '' }}" href="{{ route('all/employee/list') }}">All Employees</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a  class="{{ Session::Get('MENU') == 'holidays' ? 'active' : '' }}" href="{{ route('form/holidays/new') }}">Holidays</a>
-                            </li>
-                            <li>
-                                <a  class="{{ Session::Get('MENU') == 'leavesAdmin' ? 'active' : '' }}" href="{{ route('form/leaves/new') }}">
-                                    Leaves (Admin) <span class="badge badge-pill bg-primary float-right">1</span>
-                                </a>
-                            </li>
+                            </li> -->
+                            @if (Auth::user()->role_name=='1' || Auth::user()->role_name=='2')
+                                <li>
+                                    <a  class="{{ Session::Get('MENU') == 'leavesAdmin' ? 'active' : '' }}" href="{{ route('form/leaves/new') }}">
+                                        Leaves (Admin) <span class="badge badge-pill bg-primary float-right">1</span>
+                                    </a>
+                                </li>
+                            @endif
                             <li>
                                 <a  class="{{ Session::Get('MENU') == 'leavesEmployee' ? 'active' : '' }}" href="{{route('form/leavesemployee/new')}}">Leaves (Employee)</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a  class="{{ Session::Get('MENU') == 'leavesSettings' ? 'active' : '' }}" href="{{ route('form/leavesettings/page') }}">Leave Settings</a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a  class="{{ Session::Get('MENU') == 'attendanceAdmin' ? 'active' : '' }}" href="{{ route('attendance/page') }}">Attendance (Admin)</a>
                             </li>

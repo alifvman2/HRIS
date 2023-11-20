@@ -7,6 +7,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\Models\LeavesAdmin;
 use DB;
 use DateTime;
+use Session;
 
 class LeavesController extends Controller
 {
@@ -133,6 +134,7 @@ class LeavesController extends Controller
     // leaves Employee
     public function leavesEmployee()
     {
+        Session::put('MENU', 'leavesEmployee');
         return view('form.leavesemployee');
     }
 

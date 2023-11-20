@@ -16,8 +16,10 @@
                         </ul>
                     </div>
                     <div class="col-auto float-right ml-auto">
-                        <a href="#" class="btn add-btn ml-1" data-toggle="modal" data-target="#import_employee"><i class="fa fa-plus"></i> Import Employee</a>
-                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Employee</a>
+                        @if (Auth::user()->role_name=='2')
+                            <a href="#" class="btn add-btn ml-1" data-toggle="modal" data-target="#import_employee"><i class="fa fa-plus"></i> Import Employee</a>
+                            <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add Employee</a>
+                        @endif
                         <div class="view-icons">
                             <a href="{{ route('all/employee/card') }}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
                             <a href="{{ route('all/employee/list') }}" class="list-view btn btn-link"><i class="fa fa-bars"></i></a>
@@ -80,10 +82,17 @@
                                 <tr>
                                     <td>{{ $items->rec_id }}</td>
                                     <td>
-                                        <h2 class="table-avatar">
-                                            <a href="{{ url('employee/profile/'.$items->rec_id) }}" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $items->avatar) }}"></a>
-                                            <a href="{{ url('employee/profile/'.$items->rec_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
-                                        </h2>
+                                        @if (Auth::user()->role_name=='2')
+                                            <h2 class="table-avatar">
+                                                <a href="{{ url('employee/profile/'.$items->rec_id) }}" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $items->avatar) }}"></a>
+                                                <a href="{{ url('employee/profile/'.$items->rec_id) }}">{{ $items->name }}<span>{{ $items->position }}</span></a>
+                                            </h2>
+                                        @else
+                                            <h2 class="table-avatar">
+                                                <a href="#" class="avatar"><img alt="" src="{{ URL::to('/assets/images/'. $items->avatar) }}"></a>
+                                                <a href="#">{{ $items->name }}<span>{{ $items->position }}</span></a>
+                                            </h2>
+                                        @endif
                                     </td>
                                     <td>{{ $items->positions }}</td>
                                     <td>{{ $items->organizations }}</td>
